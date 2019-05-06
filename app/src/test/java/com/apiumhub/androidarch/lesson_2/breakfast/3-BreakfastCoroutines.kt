@@ -1,6 +1,5 @@
 package com.apiumhub.androidarch.lesson_2.breakfast
 
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -9,15 +8,16 @@ class `3-BreakfastCoroutines` {
 
     /*
     This way we start all tasks at once, but only await for them when we need their result.
-     */
+    */
 
     @Test
     fun breakfastWithCoroutines() = runBlocking {
-        val coffeeDeferred = pourCoffeeAsync(this)
-        val eggsDeferred = fryEggsAsync(this, 2)
-        val toastDeferred = toastBreadAsync(this, 2)
-        val baconDeferred = fryBaconAsync(this, 3)
-        val ojDeferred = pourOrangeJuiceAsync(this)
+
+        val coffeeDeferred = async { pourCoffeeAsync() }
+        val eggsDeferred = async { fryEggsAsync(2) }
+        val toastDeferred = async { toastBreadAsync(2) }
+        val baconDeferred = async { fryBaconAsync(3) }
+        val ojDeferred = async { pourOrangeJuiceAsync() }
 
         coffeeDeferred.await()
         println("coffee is ready")
@@ -34,11 +34,11 @@ class `3-BreakfastCoroutines` {
 
     @Test
     fun breakfastWithAwaitAll() = runBlocking {
-        val coffeeDeferred = pourCoffeeAsync(this)
-        val eggsDeferred = fryEggsAsync(this, 2)
-        val toastDeferred = toastBreadAsync(this, 2)
-        val baconDeferred = fryBaconAsync(this, 3)
-        val ojDeferred = pourOrangeJuiceAsync(this)
+        val coffeeDeferred = async { pourCoffeeAsync() }
+        val eggsDeferred = async { fryEggsAsync(2) }
+        val toastDeferred = async { toastBreadAsync(2) }
+        val baconDeferred = async { fryBaconAsync(3) }
+        val ojDeferred = async { pourOrangeJuiceAsync() }
 
         awaitAll(coffeeDeferred, eggsDeferred, toastDeferred, baconDeferred, ojDeferred)
         println("coffee is ready")
@@ -49,33 +49,28 @@ class `3-BreakfastCoroutines` {
         println("Breakfast is ready!")
     }
 
-    private suspend fun pourCoffeeAsync(scope: CoroutineScope) =
-        scope.async {
-            delay()
-            Coffee()
-        }
+    private suspend fun pourCoffeeAsync(): Coffee {
+        delay()
+        return Coffee()
+    }
 
+    private suspend fun fryEggsAsync(amount: Int): Egg {
+        delay(amount)
+        return Egg()
+    }
 
-    private suspend fun fryEggsAsync(scope: CoroutineScope, amount: Int) =
-        scope.async {
-            delay(amount)
-            Egg()
-        }
+    private suspend fun fryBaconAsync(slices: Int): Bacon {
+        delay(slices)
+        return Bacon()
+    }
 
-    private suspend fun fryBaconAsync(scope: CoroutineScope, slices: Int) =
-        scope.async {
-            delay(slices)
-            Bacon()
-        }
-
-    private suspend fun toastBreadAsync(scope: CoroutineScope, slices: Int) =
-        scope.async {
-            delay(slices)
-            val plainToast = Toast()
-            applyButter(plainToast)
-            applyJam(plainToast)
-            plainToast
-        }
+    private suspend fun toastBreadAsync(slices: Int): Toast {
+        delay(slices)
+        val plainToast = Toast()
+        applyButter(plainToast)
+        applyJam(plainToast)
+        return plainToast
+    }
 
     private suspend fun applyButter(toast: Toast) {
         delay()
@@ -85,9 +80,8 @@ class `3-BreakfastCoroutines` {
         delay()
     }
 
-    private suspend fun pourOrangeJuiceAsync(scope: CoroutineScope) =
-        scope.async {
-            delay()
-            Juice()
-        }
+    private suspend fun pourOrangeJuiceAsync(): Juice {
+        delay()
+        return Juice()
+    }
 }

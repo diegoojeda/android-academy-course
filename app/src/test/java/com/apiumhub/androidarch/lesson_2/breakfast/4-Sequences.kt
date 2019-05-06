@@ -2,7 +2,7 @@ package com.apiumhub.androidarch.lesson_2.breakfast
 
 import org.junit.Test
 
-class Sequences {
+class `4-Sequences` {
 
     /*
     As .yield(n) is a suspend function, even if it's wrapped inside a while(true) loop, it can be suspended so the sequence
