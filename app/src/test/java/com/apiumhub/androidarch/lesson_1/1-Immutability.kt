@@ -11,7 +11,7 @@ class `1-Immutability` {
         println("1 - mutableList")
         val mutableList = mutableListOf(1, 2, 3)
         println("Mutable list before adding: $mutableList")
-        val otherList = mutableList
+        val otherList: List<Int> = mutableList
         mutableList.add(4)
         println("Other list after adding: $otherList")
     }

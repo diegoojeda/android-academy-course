@@ -6,6 +6,7 @@ import arrow.core.curry
 import arrow.core.getOrElse
 import arrow.syntax.function.curried
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import org.junit.Test
 
 class `4-Functional` {
@@ -17,7 +18,7 @@ class `4-Functional` {
             .just(1, 2, 3, 4, 5)
             .map(::square)
             .filter(::equalsNine)
-            .doOnNext { printEmit() }
+            .doOnNext { printEmit(it) }
             .doOnComplete(::printComplete)
 
         observable.subscribe {
@@ -29,8 +30,8 @@ class `4-Functional` {
 
     private fun equalsNine(value: Int): Boolean = value != 9
 
-    private fun printEmit() {
-        println("This is a side effect when observable emits a value")
+    private fun printEmit(value: Int) {
+        println("This is a side effect when observable emits a value. Value emitted: $value")
     }
 
     private fun printComplete() {
@@ -46,7 +47,7 @@ class `4-Functional` {
         val toCurry: (String, Int) -> String = { p1: String, p2: Int -> "p1 is: $p1 and p2 is: $p2" }
         val curried: (String) -> (Int) -> String = toCurry.curry()//From arrow-core, along with compose and andThen
         println(toCurry("foo", 1))
-        println(curried("bar").invoke(5))
+        println(curried("bar")(5))
     }
 
     @Test
@@ -55,7 +56,7 @@ class `4-Functional` {
             { p1, p2, p3, p4, p5, p6 -> "p1: $p1, p2: $p2, p3: $p3, p4: $p4, p5: $p5, p6: $p6" }
         val curried = toCurry.curried()
         println(toCurry("Lorem", "ipsum", "dolor", "sit", "amet", "consectetur"))
-        println(curried("Lorem").invoke("ipsum").invoke("dolor").invoke("sit").invoke("amet").invoke("consectetur"))
+        println(curried("Lorem")("ipsum")("dolor")("sit")("amet")("consectetur"))
     }
 
     @Test
@@ -92,12 +93,15 @@ class `4-Functional` {
     @Test
     fun flatMap() {
         val listOfLists = listOf(listOf(1), listOf(2), listOf(3), listOf(4))
-        val mapped = listOfLists.map { lists -> listOf(lists.first(), lists.first() * lists.first()) }
+        val mapped = listOfLists.map { lists -> listSquared(lists) }
+        val flatMapped = listOfLists.flatMap { lists -> listSquared(lists) }
         println("Mapped: $mapped")
         println("Flattened: ${mapped.flatten()}")
-        val flatMapped = listOfLists.flatMap { lists -> listOf(lists.first(), lists.first() * lists.first()) }
         println("FlatMapped: $flatMapped")
     }
+
+    private fun listSquared(lists: List<Int>) =
+        listOf(lists.first(), lists.first() * lists.first())
 
     //endregion
 
