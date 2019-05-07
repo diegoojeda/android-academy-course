@@ -6,7 +6,6 @@ import arrow.core.curry
 import arrow.core.getOrElse
 import arrow.syntax.function.curried
 import io.reactivex.Observable
-import io.reactivex.schedulers.Schedulers
 import org.junit.Test
 
 class `4-Functional` {
@@ -15,11 +14,11 @@ class `4-Functional` {
     @Test
     fun RxJava() {
         val observable = Observable
-            .just(1, 2, 3, 4, 5)
-            .map(::square)
-            .filter(::equalsNine)
-            .doOnNext { printEmit(it) }
-            .doOnComplete(::printComplete)
+                .just(1, 2, 3, 4, 5)
+                .map(::square)
+                .filter(::equalsNine)
+                .doOnNext { printEmit(it) }
+                .doOnComplete(::printComplete)
 
         observable.subscribe {
             println("Received value $it")
@@ -53,7 +52,7 @@ class `4-Functional` {
     @Test
     fun curryingNParameters() {
         val toCurry: (String, String, String, String, String, String) -> String =
-            { p1, p2, p3, p4, p5, p6 -> "p1: $p1, p2: $p2, p3: $p3, p4: $p4, p5: $p5, p6: $p6" }
+                { p1, p2, p3, p4, p5, p6 -> "p1: $p1, p2: $p2, p3: $p3, p4: $p4, p5: $p5, p6: $p6" }
         val curried = toCurry.curried()
         println(toCurry("Lorem", "ipsum", "dolor", "sit", "amet", "consectetur"))
         println(curried("Lorem")("ipsum")("dolor")("sit")("amet")("consectetur"))
@@ -101,7 +100,7 @@ class `4-Functional` {
     }
 
     private fun listSquared(lists: List<Int>) =
-        listOf(lists.first(), lists.first() * lists.first())
+            listOf(lists.first(), lists.first() * lists.first())
 
     //endregion
 

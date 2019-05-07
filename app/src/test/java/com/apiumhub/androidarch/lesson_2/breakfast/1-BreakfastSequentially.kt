@@ -1,16 +1,6 @@
 package com.apiumhub.androidarch.lesson_2.breakfast
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.atomic.AtomicLong
-import kotlin.concurrent.thread
 
 class `1-BreakfastSequentially` {
     /*

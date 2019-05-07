@@ -39,7 +39,7 @@ class `5-AsyncUI` {
         private val textView = SomeTextView()
 
         @Test
-        fun asyncUIWithCoroutines() = runBlocking (/*Dispatchers.Main*/) {
+        fun asyncUIWithCoroutines() = runBlocking(/*Dispatchers.Main*/) {
             try {
                 val result = makeAsyncRequest()
                 /*

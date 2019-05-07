@@ -23,14 +23,22 @@ Another example:
 Given the list: 1 -> 2 -> 3 -> 4, the function (acc, curr) => acc * curr and an initial value of 1, reduce should return 24
  */
 
-fun <INPUT, OUTPUT> reduceRecursive(list: List<INPUT>, initialValue: OUTPUT, operation: (acc: OUTPUT, INPUT) -> OUTPUT): OUTPUT {
-    if (list.size == 1 ) {
+fun <INPUT, OUTPUT> reduceRecursive(
+        list: List<INPUT>,
+        initialValue: OUTPUT,
+        operation: (acc: OUTPUT, INPUT) -> OUTPUT
+): OUTPUT {
+    if (list.size == 1) {
         return operation(initialValue, list.first())
     }
     return reduceRecursive(list.subList(1, list.size), operation(initialValue, list.first()), operation)
 }
 
-fun <INPUT, OUTPUT> reduceIterative(list: List<INPUT>, initialValue: OUTPUT, operation: (acc: OUTPUT, INPUT) -> OUTPUT): OUTPUT {
+fun <INPUT, OUTPUT> reduceIterative(
+        list: List<INPUT>,
+        initialValue: OUTPUT,
+        operation: (acc: OUTPUT, INPUT) -> OUTPUT
+): OUTPUT {
     var value = initialValue
     for (item in list) {
         value = operation(value, item)
