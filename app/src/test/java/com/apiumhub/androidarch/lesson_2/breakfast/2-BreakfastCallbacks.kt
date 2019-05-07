@@ -29,10 +29,12 @@ class `2-BreakfastCallbacks` {
             println("bacon is ready")
             bacon = it
         }
-        toastBread(2) {
-            applyButter(it)
-            applyJam(it)
-            toast = it
+        toastBread(2) { plainToast ->
+            applyButter(plainToast) { toastWithButter ->
+                applyJam(toastWithButter) { toastWithJam ->
+                    toast = toastWithJam
+                }
+            }
             println("toast is ready")
         }
         pourOrangeJuice {
@@ -42,6 +44,7 @@ class `2-BreakfastCallbacks` {
         waitForBreakfastReady()
     }
 
+    //region common
     private fun pourCoffee(func: (coffee: Coffee) -> Unit) {
         Thread {
             sleep()
@@ -70,12 +73,14 @@ class `2-BreakfastCallbacks` {
         }.start()
     }
 
-    private fun applyButter(toast: Toast) {
+    private fun applyButter(toast: Toast, func: (Toast) -> Unit) {
         sleep()
+        func(toast)
     }
 
-    private fun applyJam(toast: Toast) {
+    private fun applyJam(toast: Toast, func: (Toast) -> Unit) {
         sleep()
+        func(toast)
     }
 
     private fun pourOrangeJuice(func: (juice: Juice) -> Unit) {
@@ -91,4 +96,5 @@ class `2-BreakfastCallbacks` {
         }
         println("Breakfast is ready!")
     }
+    //endregion
 }
