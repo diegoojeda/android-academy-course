@@ -1,4 +1,4 @@
-package com.apiumhub.androidarch.lesson_1.exercise
+package com.apiumhub.androidarch.lesson_1.exercise.operators
 
 import org.junit.Assert
 import org.junit.Test
