@@ -1,5 +1,6 @@
-package com.apiumhub.androidarch.lesson_2.breakfast
+package com.apiumhub.androidarch.lesson_2
 
+import com.apiumhub.androidarch.lesson_2.breakfast.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import java.io.IOException

@@ -46,13 +46,13 @@ class `4-PartialApplicationsAndCurrying` {
     @Test
     fun applyManyParameters() {
         val prefixAndBang = ::formatString.partially3("!")
-        val helloAndBang = prefixAndBang.partially1("Hello")
-        println(helloAndBang(", world"))
-        println(helloAndBang(", partial applications"))
-        println(helloAndBang(", functional programming"))
+        val greetAndBang = prefixAndBang.partially1("Hello, ")
+        println(greetAndBang("world"))
+        println(greetAndBang("partial applications"))
+        println(greetAndBang("functional programming"))
     }
 
-    private fun formatString(prefix: String, x: String, postfix: String) = "$prefix$x$postfix"
+    private fun formatString(prefix: String, infix: String, postfix: String) = "$prefix$infix$postfix"
     //endregion
 
     //region 4-Currying

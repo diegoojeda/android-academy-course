@@ -28,17 +28,17 @@ class `6-Functional` {
 
     @Test
     fun flatMap() {
-        val listOfLists = listOf(listOf(1), listOf(2), listOf(3), listOf(4))
-        val mapped = listOfLists.map { lists -> listSquared(lists) }
-        val flatMapped = listOfLists.flatMap { lists -> listSquared(lists) }
-        println("listOfLists: $listOfLists")
+        val originalList = listOf(1, 2, 3, 4)
+        val mapped = originalList.map { lists -> listSquared(lists) }
+        val flatMapped = originalList.flatMap { lists -> listSquared(lists) }
+        println("listOfLists: $originalList")
         println("Mapped: $mapped")
         println("FlatMapped: $flatMapped")
         println("Mapped flattened: ${mapped.flatten()}")
     }
 
-    private fun listSquared(lists: List<Int>) =
-            listOf(lists.first(), lists.first() * lists.first())
+    private fun listSquared(value: Int) =
+        listOf(value, value * value)
 
     //endregion
 

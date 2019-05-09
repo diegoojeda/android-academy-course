@@ -40,15 +40,15 @@ class `1-Immutability` {
     }
     //endregion
 
-    //region 4 - How does this work with operators over collections?
-    @Test
-    fun filter() {
-        //Operators such as filter, map, flatmap... return a brand new list with the result of the operation; it does NOT modify the original list even if it's mutable
-        println("4 - filter")
-        val mutableList = mutableListOf(1, 2, 3)
-        val filteredList = mutableList.filter { it != 3 }
-        println("Initial mutable list: $mutableList")
-        println("Filtered list: $filteredList")
-    }
-    //endregion
+//    //region 4 - How does this work with operators over collections?
+//    @Test
+//    fun filter() {
+//        //Operators such as filter, map, flatmap... return a brand new list with the result of the operation; it does NOT modify the original list even if it's mutable
+//        println("4 - filter")
+//        val mutableList = mutableListOf(1, 2, 3)
+//        val filteredList = mutableList.filter { it != 3 }
+//        println("Initial mutable list: $mutableList")
+//        println("Filtered list: $filteredList")
+//    }
+//    //endregion
 }

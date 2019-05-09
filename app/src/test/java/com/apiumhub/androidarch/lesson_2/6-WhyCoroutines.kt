@@ -1,9 +1,10 @@
-package com.apiumhub.androidarch.lesson_2.breakfast
+package com.apiumhub.androidarch.lesson_2
 
+import com.apiumhub.androidarch.lesson_2.breakfast.delay
+import com.apiumhub.androidarch.lesson_2.breakfast.sleep
 import junit.framework.TestCase.fail
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
-import java.io.File
 import java.io.FileInputStream
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
