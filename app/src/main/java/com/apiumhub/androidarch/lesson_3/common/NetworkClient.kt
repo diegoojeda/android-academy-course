@@ -10,7 +10,7 @@ class NetworkClient {
     suspend fun getUsers(): Either<Error, List<User>> {
         delay(1000)
         if (Random.nextInt().absoluteValue % 100 < 10) {
-            return Either.left(NoNetworkConnectionError())
+            return Either.left(InternalServerError())
         }
         return Either.right(
             listOf(
@@ -48,3 +48,5 @@ class NetworkClient {
         )
     }
 }
+
+class InternalServerError: Error()

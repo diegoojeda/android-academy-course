@@ -1,14 +1,14 @@
 package com.apiumhub.androidarch.lesson_3.common
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.apiumhub.androidarch.R
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.user_row.view.*
 
-class MainAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<MainAdapter.UserViewHolder>() {
+class MainAdapter : RecyclerView.Adapter<MainAdapter.UserViewHolder>() {
 
     private var users: List<User> = emptyList()
 
@@ -32,7 +32,7 @@ class MainAdapter : androidx.recyclerview.widget.RecyclerView.Adapter<MainAdapte
         notifyDataSetChanged()
     }
 
-    inner class UserViewHolder(private val view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    inner class UserViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
         fun bind(user: User) {
             Glide.with(view).load(user.avatar).into(view.userAvatarIv)
