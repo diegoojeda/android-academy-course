@@ -21,7 +21,7 @@ class `1-BreakfastSequentially` {
         println("toast is ready")
         pourOrangeJuice()
         println("orange juice is ready")
-        println("Breakfast is ready!")
+        println("Breakfast is ready! Coffee is cold now")
     }
 
     private fun pourCoffee(): Coffee {

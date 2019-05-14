@@ -1,4 +1,4 @@
-package com.apiumhub.androidarch.lesson_3
+package com.apiumhub.androidarch.lesson_3.common
 
 import arrow.core.Option
 import kotlinx.coroutines.delay

@@ -20,6 +20,8 @@ suspend fun delay(times: Int = 1) {
     }
 }
 
-suspend fun awaitAll(vararg coroutines: Deferred<*>) {
-    coroutines.forEach { it.await() }
+object Common{
+    suspend fun awaitAll(vararg coroutines: Deferred<*>) {
+        coroutines.forEach { it.await() }
+    }
 }

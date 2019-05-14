@@ -27,10 +27,13 @@ class `6-WhyCoroutines` {
         }
         fos.close()
         countDownLatch.await(3, TimeUnit.SECONDS)
-        if (countDownLatch.count != 0L) {
+        if (hasNotEntered(countDownLatch)) {
             fail()
         }
     }
+
+    private fun hasNotEntered(countDownLatch: CountDownLatch) =
+        countDownLatch.count != 0L
 
     private fun getFileSizeInBackground(file: FileInputStream, callback: (Int) -> Unit) {
         thread(start = true) {
@@ -56,6 +59,15 @@ class `6-WhyCoroutines` {
     private suspend fun getFileSizeWithCoroutines(file: FileInputStream): Int {
         delay(1)
         return file.read()
+    }
+
+    @Test
+    fun fileProcessingWithCoroutinesAndTryWithResources() = runBlocking {
+        FileInputStream(FILE_NAME).use {
+            val bytes = getFileSizeWithCoroutines(it)
+            println("Finished processing file")
+            println("Read $bytes bytes")
+        }
     }
 
     companion object {

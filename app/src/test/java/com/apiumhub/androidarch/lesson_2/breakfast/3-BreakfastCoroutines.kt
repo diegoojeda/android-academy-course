@@ -79,7 +79,7 @@ class `3-BreakfastCoroutines` {
         val baconDeferred = async { fryBacon(3) }
         val ojDeferred = async { pourOrangeJuice() }
 
-        awaitAll(coffeeDeferred, eggsDeferred, toastDeferred, baconDeferred, ojDeferred)
+        Common.awaitAll(coffeeDeferred, eggsDeferred, toastDeferred, baconDeferred, ojDeferred)
         println("coffee is ready")
         println("eggs are ready")
         println("bacon is ready")

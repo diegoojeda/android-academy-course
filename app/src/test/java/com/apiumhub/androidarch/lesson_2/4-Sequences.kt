@@ -1,5 +1,6 @@
 package com.apiumhub.androidarch.lesson_2
 
+import org.junit.Assert
 import org.junit.Test
 
 class `4-Sequences` {
@@ -11,16 +12,17 @@ class `4-Sequences` {
     @Test
     fun fibonacciSequence() {
         val fibonacci: Sequence<Int> = sequence {
-            yield(1) // first Fibonacci number
-            var cur = 1
+            var current = 1
             var next = 1
             while (true) {
-                yield(next) // next Fibonacci number
-                val tmp = cur + next
-                cur = next
+                yield(current) // next Fibonacci number
+                val tmp = current + next
+                current = next
                 next = tmp
             }
         }
-        println(fibonacci.take(10).joinToString())
+        val actual = fibonacci.take(10).joinToString()
+        println(actual)
+        Assert.assertEquals("1, 1, 2, 3, 5, 8, 13, 21, 34, 55", actual)
     }
 }

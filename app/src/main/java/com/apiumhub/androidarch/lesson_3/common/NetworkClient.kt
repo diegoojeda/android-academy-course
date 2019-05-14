@@ -1,15 +1,16 @@
-package com.apiumhub.androidarch.lesson_3
+package com.apiumhub.androidarch.lesson_3.common
 
 import arrow.core.Either
 import kotlinx.coroutines.delay
 import java.util.*
+import kotlin.math.absoluteValue
 import kotlin.random.Random
 
 class NetworkClient {
     suspend fun getUsers(): Either<Error, List<User>> {
         delay(1000)
-        if (Random.nextBoolean()) {
-            return Either.left(Error())
+        if (Random.nextInt().absoluteValue % 100 < 10) {
+            return Either.left(NoNetworkConnectionError())
         }
         return Either.right(
             listOf(

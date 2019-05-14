@@ -14,6 +14,10 @@ class `2-BreakfastCallbacks` {
     to each element, and check periodically if it's all finished. We could also move the check inside every callback,
     meaning that we'd duplicate this check on every item that we wanted to add to our breakfast
      */
+    /*
+     Esto se puede complicar hasta el infinito si queremos, añadiendo recursos compartidos (como la sartén),
+     manejo de estos recursos con semáforos, deadlocks...
+     */
 
     @Test
     fun breakfastWithCallbacks() {
