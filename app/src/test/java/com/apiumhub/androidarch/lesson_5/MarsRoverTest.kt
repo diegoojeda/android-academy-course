@@ -1,4 +1,4 @@
-package com.apiumhub.androidarch.lesson_5.solved
+package com.apiumhub.androidarch.lesson_5
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test

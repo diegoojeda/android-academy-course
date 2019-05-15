@@ -1,9 +1,14 @@
-package com.apiumhub.androidarch.lesson_5.solved
+package com.apiumhub.androidarch.lesson_5
 
+import com.apiumhub.androidarch.lesson_5.solved.Instruction
+import com.apiumhub.androidarch.lesson_5.solved.MoveForward
+import com.apiumhub.androidarch.lesson_5.solved.Orientation
+import com.apiumhub.androidarch.lesson_5.solved.RotateLeft
+import com.apiumhub.androidarch.lesson_5.solved.RotateRight
 import java.util.*
 
-class MarsRover {
 
+class MarsRover {
     private val instructions = HashMap<Char, Instruction>()
     private val orientations = HashMap<Char, Orientation>()
 
@@ -18,21 +23,7 @@ class MarsRover {
     }
 
     fun compute(input: String): String {
-        val (initialPositionInput, pathInput) = input.split("\n")
-
-        val (x, y, orientation) = initialPositionInput.split(" ")
-        val initialPosition = Position(
-            x.toInt(),
-            y.toInt(),
-            parseOrientation(orientation[0])
-        )
-
-        val path = Path(pathInput.toCharArray().map {
-            parseInstruction(it)
-        })
-        val finalPosition = path.computeDestination(initialPosition)
-
-        return "${finalPosition.x} ${finalPosition.y} ${toString(finalPosition.orientation)}"
+        TODO()
     }
 
     private fun parseOrientation(input: Char): Orientation =
