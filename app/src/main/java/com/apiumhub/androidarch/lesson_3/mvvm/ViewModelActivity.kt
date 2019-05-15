@@ -12,7 +12,6 @@ import com.apiumhub.androidarch.lesson_3.common.User
 import kotlinx.android.synthetic.main.home_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 
 class ViewModelActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
@@ -25,9 +24,8 @@ class ViewModelActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         viewModel = ViewModelProviders.of(this).get(ViewModelSolution::class.java)
         mainRecyclerView.adapter = adapter
         mainRecyclerView.layoutManager = LinearLayoutManager(this)
-        mainRetryBtn.setOnClickListener { start() }
+        mainRetryBtn.setOnClickListener { viewModel.retry() }
         viewModel.users.observe(this, onEventReceived())
-        start()
     }
 
     private fun onEventReceived() = Observer<ViewModelEvent> {
@@ -39,6 +37,7 @@ class ViewModelActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     private fun showData(data: List<User>) {
+        mainErrorTv.visibility = View.GONE
         mainLoading.visibility = View.GONE
         adapter.update(data)
     }
@@ -50,12 +49,5 @@ class ViewModelActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     private fun showError() {
         mainLoading.visibility = View.GONE
         mainErrorTv.visibility = View.VISIBLE
-    }
-
-    private fun start() {
-        showLoading()
-        launch {
-            viewModel.start()
-        }
     }
 }

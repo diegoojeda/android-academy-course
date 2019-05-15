@@ -3,37 +3,54 @@ package com.apiumhub.androidarch.lesson_3.mvvm
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.apiumhub.androidarch.lesson_3.common.*
+import androidx.lifecycle.viewModelScope
+import com.apiumhub.androidarch.lesson_3.common.ConnectionProvider
+import com.apiumhub.androidarch.lesson_3.common.DatabaseClient
+import com.apiumhub.androidarch.lesson_3.common.NetworkClient
+import com.apiumhub.androidarch.lesson_3.common.User
+import kotlinx.coroutines.launch
 
 class ViewModelSolution : ViewModel() {
     private val networkClient = NetworkClient()
     private val databaseClient = DatabaseClient()
     private val connectionProvider = ConnectionProvider()
 
-    private val mutableUsers = MutableLiveData<ViewModelEvent>()
-    val users: LiveData<ViewModelEvent> = mutableUsers
+    private val usersMutable = MutableLiveData<ViewModelEvent>()
 
-    suspend fun start() {
+    val users: LiveData<ViewModelEvent> = usersMutable
+
+    init {
+        viewModelScope.launch {
+            getData()
+        }
+    }
+
+    private suspend fun getData() {
+        usersMutable.postValue(ViewModelEvent.Loading)
         databaseClient.getUsers().fold({
             loadFromNetworkClient()
         }, {
-            mutableUsers.postValue(ViewModelEvent.Success(it))
+            usersMutable.postValue(ViewModelEvent.Success(it))
         })
     }
 
     private suspend fun loadFromNetworkClient() {
         if (connectionProvider.hasNetworkConnection()) {
-            networkClient.getUsers().fold(::postError) {
-                mutableUsers.postValue(ViewModelEvent.Success(it))
+            networkClient.getUsers().fold({
+                usersMutable.postValue(ViewModelEvent.Error)
+            }, {
+                usersMutable.postValue(ViewModelEvent.Success(it))
                 databaseClient.storeUsers(it)
-            }
+            })
         } else {
-            postError(NoNetworkConnectionError())
+            usersMutable.postValue(ViewModelEvent.Error)
         }
     }
 
-    private fun postError(error: Error) {
-        mutableUsers.postValue(ViewModelEvent.Error)
+    fun retry() {
+        viewModelScope.launch {
+            getData()
+        }
     }
 }
 

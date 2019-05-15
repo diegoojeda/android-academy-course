@@ -34,7 +34,8 @@
 
 
         <activity android:name=".lesson_3.mvvm.ViewModelActivity"
-            android:label="AA ViewModel">
+            android:label="AA ViewModel"
+            android:screenOrientation="sensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
