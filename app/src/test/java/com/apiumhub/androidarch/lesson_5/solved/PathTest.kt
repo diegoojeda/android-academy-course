@@ -3,7 +3,6 @@ package com.apiumhub.androidarch.lesson_5.solved
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 
-
 class PathTest {
 
     @Test
