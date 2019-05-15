@@ -1,4 +1,4 @@
-package com.apiumhub.androidarch.lesson_5
+package com.apiumhub.androidarch.lesson_5.solved
 
 data class Position(val x: Int, val y: Int, val orientation: Orientation)
 

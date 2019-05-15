@@ -1,4 +1,4 @@
-package com.apiumhub.androidarch.lesson_5
+package com.apiumhub.androidarch.lesson_5.solved
 
 import java.util.*
 
@@ -21,9 +21,15 @@ class MarsRover {
         val (gridDimensionInput, initialPositionInput, pathInput) = input.split("\n")
 
         val (x, y, orientation) = initialPositionInput.split(" ")
-        val initialPosition = Position(x.toInt(), y.toInt(), parseOrientation(orientation[0]))
+        val initialPosition = Position(
+            x.toInt(),
+            y.toInt(),
+            parseOrientation(orientation[0])
+        )
 
-        val path = Path(pathInput.toCharArray().map { parseInstruction(it) })
+        val path = Path(pathInput.toCharArray().map {
+            parseInstruction(it)
+        })
         val finalPosition = path.computeDestination(initialPosition)
 
         return "${finalPosition.x} ${finalPosition.y} ${toString(finalPosition.orientation)}"
