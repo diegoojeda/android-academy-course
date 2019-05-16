@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".lesson_3.god.GodActivity"
+            android:name=".lesson_6.god.GodActivity"
             android:label="AA">
 
             <intent-filter>
@@ -23,7 +23,8 @@
 
         </activity>
 
-        <activity android:name=".lesson_3.mvp.PresenterActivity"
+        <activity
+            android:name=".lesson_6.mvp.PresenterActivity"
             android:label="AA Presenter">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,7 +34,8 @@
         </activity>
 
 
-        <activity android:name=".lesson_3.mvvm.ViewModelActivity"
+        <activity
+            android:name=".lesson_6.mvvm.ViewModelActivity"
             android:label="AA ViewModel"
             android:screenOrientation="sensor">
             <intent-filter>

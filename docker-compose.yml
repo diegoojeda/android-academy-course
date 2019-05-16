@@ -1,0 +1,10 @@
+version: '3'
+services:
+  simfy_dyson:
+    hostname: academy_dyson
+    container_name: academy_dyson
+    image: apiumhub/dyson-quick-mockserver
+    volumes:
+      - "./app/src/test/resources/fakeserver:/api-fakes"
+    ports:
+      - "8080:8080"
