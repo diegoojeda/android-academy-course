@@ -23,6 +23,10 @@ class UsersRetrofitRepository(
                 .right()
         }
 
+    /*
+    Utility method that extends an Iterable of UserNetworkDto, and returns a list containing the result of mapping each
+    item from the original list applying the transformation supplied, except for those that throw an InvalidUserIdException
+     */
     private fun Iterable<UserNetworkDto>.filterMapInternal(transform: (UserNetworkDto) -> User): List<User> {
         return this.fold(listOf()) { acc, next ->
             try {

@@ -12,8 +12,4 @@ class GetUsers(
     suspend fun execute(): List<User> {
         TODO()
     }
-
-    private suspend fun userNotInDb(): List<User> {
-        TODO()
-    }
 }
