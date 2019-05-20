@@ -18,8 +18,22 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 }
 
-fun appDb(context: Context): AppDatabase = Room.databaseBuilder(
-    context,
-    AppDatabase::class.java,
-    DATA_BASE_NAME
-).build()
+object AppDb {
+    private lateinit var db: AppDatabase
+
+    fun initializeDb(context: Context) {
+        db = Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            DATA_BASE_NAME
+        ).build()
+    }
+
+    fun getDb(): AppDatabase {
+        if (!::db.isInitialized) {
+            throw Error("Database not initialized")
+        }
+        return db
+    }
+
+}
