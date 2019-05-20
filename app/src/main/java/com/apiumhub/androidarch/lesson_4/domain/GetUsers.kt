@@ -1,15 +1,15 @@
 package com.apiumhub.androidarch.lesson_4.domain
 
-import arrow.core.Either
-import com.apiumhub.androidarch.lesson_4.domain.exception.DomainError
-import com.apiumhub.androidarch.lesson_6.common.User
+import arrow.core.Try
+import com.apiumhub.androidarch.lesson_4.data.db.UsersRoomRepository
+import com.apiumhub.androidarch.lesson_4.data.network.UsersRetrofitRepository
+import com.apiumhub.androidarch.lesson_4.domain.entity.User
 
 class GetUsers(
-    private val getFromNetwork: suspend () -> Either<DomainError, List<User>>,
-    private val getFromDb: suspend () -> Either<DomainError, List<User>>,
-    private val storeOnDb: (List<User>) -> Unit
+    private val networkRepository: UsersRetrofitRepository,
+    private val databaseRepository: UsersRoomRepository
 ) {
-    suspend fun execute(): List<User> {
-        TODO()
+    suspend fun execute(): Try<List<User>> {
+        return networkRepository.getAll()
     }
 }

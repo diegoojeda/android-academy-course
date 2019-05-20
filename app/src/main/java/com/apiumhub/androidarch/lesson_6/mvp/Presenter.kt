@@ -1,15 +1,11 @@
 package com.apiumhub.androidarch.lesson_6.mvp
 
-import com.apiumhub.androidarch.lesson_6.common.ConnectionProvider
-import com.apiumhub.androidarch.lesson_6.common.DatabaseClient
-import com.apiumhub.androidarch.lesson_6.common.NetworkClient
-import com.apiumhub.androidarch.lesson_6.common.User
+import com.apiumhub.androidarch.lesson_4.domain.GetUsers
+import com.apiumhub.androidarch.lesson_4.domain.entity.User
 
 class Presenter(
     private var ui: Contract?,
-    private val networkClient: NetworkClient,
-    private val databaseClient: DatabaseClient,
-    private val connectionProvider: ConnectionProvider
+    private val getUsers: GetUsers
 ) {
     interface Contract {
         fun onDataLoaded(users: List<User>)
@@ -18,7 +14,6 @@ class Presenter(
         fun showLoading()
         fun hideLoading()
     }
-
 
     fun start() {
         //TODO

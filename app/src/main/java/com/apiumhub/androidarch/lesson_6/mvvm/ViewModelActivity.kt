@@ -7,8 +7,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apiumhub.androidarch.R
+import com.apiumhub.androidarch.lesson_4.domain.entity.User
 import com.apiumhub.androidarch.lesson_6.common.MainAdapter
-import com.apiumhub.androidarch.lesson_6.common.User
 import kotlinx.android.synthetic.main.home_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope

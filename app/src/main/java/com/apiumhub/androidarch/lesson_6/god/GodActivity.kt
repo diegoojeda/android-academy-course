@@ -5,7 +5,11 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apiumhub.androidarch.R
-import com.apiumhub.androidarch.lesson_6.common.*
+import com.apiumhub.androidarch.lesson_4.domain.entity.User
+import com.apiumhub.androidarch.lesson_6.common.ConnectionProvider
+import com.apiumhub.androidarch.lesson_6.common.DatabaseClient
+import com.apiumhub.androidarch.lesson_6.common.MainAdapter
+import com.apiumhub.androidarch.lesson_6.common.NetworkClient
 import kotlinx.android.synthetic.main.home_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope

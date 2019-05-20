@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.apiumhub.androidarch.lesson_4.domain.entity.User
 import com.apiumhub.androidarch.lesson_6.common.ConnectionProvider
 import com.apiumhub.androidarch.lesson_6.common.DatabaseClient
 import com.apiumhub.androidarch.lesson_6.common.NetworkClient
-import com.apiumhub.androidarch.lesson_6.common.User
 import kotlinx.coroutines.launch
 
 class ViewModelSolution : ViewModel() {

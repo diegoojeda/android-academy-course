@@ -1,6 +1,7 @@
 package com.apiumhub.androidarch.lesson_6.common
 
 import arrow.core.Either
+import com.apiumhub.androidarch.lesson_4.domain.entity.User
 import kotlinx.coroutines.delay
 import java.util.*
 import kotlin.math.absoluteValue

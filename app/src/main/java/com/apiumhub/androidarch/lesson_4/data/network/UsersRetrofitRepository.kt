@@ -1,10 +1,8 @@
 package com.apiumhub.androidarch.lesson_4.data.network
 
-import arrow.core.Either
-import arrow.core.right
+import arrow.core.Try
 import com.apiumhub.androidarch.lesson_4.data.network.dto.UserNetworkDto
 import com.apiumhub.androidarch.lesson_4.domain.entity.User
-import com.apiumhub.androidarch.lesson_4.domain.exception.DomainError
 import com.apiumhub.androidarch.lesson_4.domain.exception.InvalidUserIdException
 import com.apiumhub.androidarch.lesson_4.domain.repositories.ReadRepository
 import kotlinx.coroutines.Dispatchers
@@ -14,13 +12,14 @@ class UsersRetrofitRepository(
     private val usersApi: UsersApi,
     private val mapper: (UserNetworkDto) -> User
 ) : ReadRepository<User> {
-    override suspend fun getAll(): Either<DomainError, List<User>> =
+    override suspend fun getAll(): Try<List<User>> =
         withContext(Dispatchers.IO) {
-            usersApi
-                .getUsersListAsync()
-                .await()
-                .filterMapInternal(mapper)
-                .right()
+            Try {
+                usersApi
+                    .getUsersListAsync()
+                    .await()
+                    .filterMapInternal(mapper)
+            }
         }
 
     /*

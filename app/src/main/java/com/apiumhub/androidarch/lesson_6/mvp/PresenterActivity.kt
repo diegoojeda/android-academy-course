@@ -5,19 +5,32 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apiumhub.androidarch.R
-import com.apiumhub.androidarch.lesson_6.common.*
+import com.apiumhub.androidarch.appDb
+import com.apiumhub.androidarch.lesson_4.data.db.UserDbEntity
+import com.apiumhub.androidarch.lesson_4.data.db.UsersRoomRepository
+import com.apiumhub.androidarch.lesson_4.data.db.toDomain
+import com.apiumhub.androidarch.lesson_4.data.network.UsersApi
+import com.apiumhub.androidarch.lesson_4.data.network.UsersRetrofitRepository
+import com.apiumhub.androidarch.lesson_4.data.network.dto.UserNetworkDto
+import com.apiumhub.androidarch.lesson_4.data.network.toDomain
+import com.apiumhub.androidarch.lesson_4.domain.GetUsers
+import com.apiumhub.androidarch.lesson_4.domain.entity.User
+import com.apiumhub.androidarch.lesson_6.common.MainAdapter
 import kotlinx.android.synthetic.main.home_layout.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class PresenterActivity: AppCompatActivity(), PresenterSolution.Contract, CoroutineScope by MainScope() {
-    private val presenter = PresenterSolution(
-        this,
-        NetworkClient(),
-        DatabaseClient(),
-        ConnectionProvider()
-    )
+class PresenterActivity : AppCompatActivity(), PresenterSolution.Contract, CoroutineScope by MainScope() {
+    private val presenter by lazy {
+        PresenterSolution(
+            this,
+            GetUsers(
+                UsersRetrofitRepository(UsersApi.create(), UserNetworkDto::toDomain),
+                UsersRoomRepository(appDb(this).userDao(), UserDbEntity::toDomain)
+            )
+        )
+    }
 
     private val adapter = MainAdapter()
 

@@ -1,12 +1,11 @@
 package com.apiumhub.androidarch.lesson_6.mvp
 
-import com.apiumhub.androidarch.lesson_6.common.*
+import com.apiumhub.androidarch.lesson_4.domain.GetUsers
+import com.apiumhub.androidarch.lesson_4.domain.entity.User
 
 class PresenterSolution(
     private var ui: Contract?,
-    private val networkClient: NetworkClient,
-    private val databaseClient: DatabaseClient,
-    private val connectionProvider: ConnectionProvider
+    private val getUsers: GetUsers
 ) {
     interface Contract {
         fun onDataLoaded(users: List<User>)
@@ -18,21 +17,10 @@ class PresenterSolution(
 
     suspend fun start() {
         ui?.showLoading()
-        databaseClient.getUsers().fold({ loadFromNetworkClient() }, ::showData)
+        getUsers.execute().fold(::showError, ::showData)
     }
 
-    private suspend fun loadFromNetworkClient() {
-        if (connectionProvider.hasNetworkConnection()) {
-            networkClient.getUsers().fold(::showError) {
-                showData(it)
-                databaseClient.storeUsers(it)
-            }
-        } else {
-            showError(NoNetworkConnectionError())
-        }
-    }
-
-    private fun showError(error: Error) {
+    private fun showError(error: Throwable) {
         //Can do pattern matching on the error
         ui?.hideLoading()
         ui?.onError()
