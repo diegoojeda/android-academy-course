@@ -1,1 +1,1 @@
-include ':app', ':ui-testing'
+include ':app', ':ui-testing', ':ui-blackbox-testing'
