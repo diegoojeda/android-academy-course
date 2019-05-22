@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.apiumhub.androidarch.AppDb
 import com.apiumhub.androidarch.R
-import com.apiumhub.androidarch.appDb
 import com.apiumhub.androidarch.lesson_4.data.db.UserDbEntity
 import com.apiumhub.androidarch.lesson_4.data.db.UsersRoomRepository
 import com.apiumhub.androidarch.lesson_4.data.db.toDomain
@@ -27,7 +27,7 @@ class PresenterActivity : AppCompatActivity(), PresenterSolution.Contract, Corou
             this,
             GetUsers(
                 UsersRetrofitRepository(UsersApi.create(), UserNetworkDto::toDomain),
-                UsersRoomRepository(appDb(this).userDao(), UserDbEntity::toDomain)
+                UsersRoomRepository(AppDb.getDb().userDao(), UserDbEntity::toDomain)
             )
         )
     }
