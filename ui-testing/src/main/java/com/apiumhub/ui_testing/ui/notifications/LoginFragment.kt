@@ -33,7 +33,7 @@ class LoginFragment : Fragment() {
             updateSubmitBtn()
         })
         login_submit_btn.setOnClickListener {
-            startActivity(Intent(context, LoggedInActivity::class.java))
+            startActivity( LoggedInActivity.getCallingIntent(context, login_username_et.text.toString()))
         }
     }
 

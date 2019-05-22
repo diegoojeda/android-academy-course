@@ -48,6 +48,12 @@ class AppiumExampleTest {
         Assert.assertEquals("This is dashboard Fragment", textView.text)
     }
 
+    //region solutions
+
+    
+
+    //endregion
+
     @After
     fun tearDown() {
         driver.quit()
