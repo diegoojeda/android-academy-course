@@ -20,8 +20,10 @@ class AppiumExampleTest {
         val capabilities = DesiredCapabilities()
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, "Android")
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "android-emulator")
+        capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9")
         capabilities.setCapability("appPackage", "com.apiumhub.ui_testing")
         capabilities.setCapability("appActivity", ".MainActivity")
+        capabilities.setCapability("automationName", "UiAutomator2")
 
         try {
             driver = AndroidDriver(URL("http://127.0.0.1:4723/wd/hub"), capabilities)
@@ -29,7 +31,7 @@ class AppiumExampleTest {
             e.printStackTrace()
         }
 
-        driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS)
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS)
     }
 
     @Test
@@ -49,8 +51,31 @@ class AppiumExampleTest {
     }
 
     //region solutions
+    @Test
+    fun `Navigate to login and check button is disabled`() {
+        navigateToLogin()
+        val usernameEditText = driver.findElementById("login_username_et")
+        usernameEditText.setValue("invalid email")
+        assertSubmitButtonIsDisabled()
+    }
 
-    
+    @Test
+    fun `Navigate to login, type an invalid password and check button is disabled`() {
+        navigateToLogin()
+        val passwordEditText = driver.findElementById("login_password_et")
+        passwordEditText.setValue("1234")
+        assertSubmitButtonIsDisabled()
+    }
+
+    private fun assertSubmitButtonIsDisabled() {
+        val submitButton = driver.findElementById("login_submit_btn")
+        Assert.assertFalse(submitButton.isEnabled)
+    }
+
+    private fun navigateToLogin() {
+        val loginIcon = driver.findElementById("navigation_login")
+        loginIcon.click()
+    }
 
     //endregion
 

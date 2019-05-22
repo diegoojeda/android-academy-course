@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_login"
         android:name="com.apiumhub.ui_testing.ui.notifications.LoginFragment"
         android:label="@string/title_login"
         tools:layout="@layout/fragment_login" />
