@@ -1,25 +1,25 @@
 package com.apiumhub.ui_testing.ui.notifications
 
-import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import kotlinx.android.synthetic.main.fragment_login.*
-import android.text.TextUtils
 import com.apiumhub.ui_testing.R
 import com.apiumhub.ui_testing.ui.LoggedInActivity
+import kotlinx.android.synthetic.main.fragment_login.*
 
 
 class LoginFragment : Fragment() {
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View = inflater.inflate(R.layout.fragment_login, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +33,9 @@ class LoginFragment : Fragment() {
             updateSubmitBtn()
         })
         login_submit_btn.setOnClickListener {
-            startActivity( LoggedInActivity.getCallingIntent(context, login_username_et.text.toString()))
+            Handler().postDelayed({
+                startActivity(LoggedInActivity.getCallingIntent(context, login_username_et.text.toString()))
+            }, 1500)
         }
     }
 
@@ -48,8 +50,7 @@ class LoginFragment : Fragment() {
     private fun validateUsername(username: String) {
         if (isValidEmail(username)) {
             login_username_et.error = null
-        }
-        else {
+        } else {
             login_username_et.error = "Invalid email"
         }
     }
@@ -57,8 +58,7 @@ class LoginFragment : Fragment() {
     private fun validatePassword(password: String) {
         if (password.length < 6) {
             login_password_et.error = "Password too short"
-        }
-        else {
+        } else {
             login_password_et.error = null
         }
     }
@@ -73,7 +73,7 @@ class LoginFragment : Fragment() {
 
 }
 
-open class EmptyTextWatcher: TextWatcher {
+open class EmptyTextWatcher : TextWatcher {
     override fun afterTextChanged(s: Editable?) {
 
     }

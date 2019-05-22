@@ -54,17 +54,37 @@ class AppiumExampleTest {
     @Test
     fun `Navigate to login and check button is disabled`() {
         navigateToLogin()
-        val usernameEditText = driver.findElementById("login_username_et")
-        usernameEditText.setValue("invalid email")
+        typeEmail("invalid email")
         assertSubmitButtonIsDisabled()
     }
 
     @Test
     fun `Navigate to login, type an invalid password and check button is disabled`() {
         navigateToLogin()
-        val passwordEditText = driver.findElementById("login_password_et")
-        passwordEditText.setValue("1234")
+        typePassword("1234")
         assertSubmitButtonIsDisabled()
+    }
+
+    @Test
+    fun `Navigate to login, type valid username and password, and navigate to next screen`() {
+        navigateToLogin()
+        typeEmail("someEmail@someDomain.com")
+        typePassword("123456")
+        val submitButton = driver.findElementById("login_submit_btn")
+        Assert.assertTrue(submitButton.isEnabled)
+        submitButton.click()
+        val usernameLoggedIn = driver.findElementById("logged_in_tv")
+        Assert.assertEquals("User someEmail@someDomain.com is logged in", usernameLoggedIn.text)
+    }
+
+    private fun typePassword(password: String) {
+        val passwordEditText = driver.findElementById("login_password_et")
+        passwordEditText.setValue(password)
+    }
+
+    private fun typeEmail(email: String) {
+        val usernameEditText = driver.findElementById("login_username_et")
+        usernameEditText.setValue(email)
     }
 
     private fun assertSubmitButtonIsDisabled() {
