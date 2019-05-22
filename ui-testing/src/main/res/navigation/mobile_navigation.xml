@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.apiumhub.ui_testing.ui.notifications.NotificationsFragment"
+        android:name="com.apiumhub.ui_testing.ui.notifications.LoginFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_login" />
 </navigation>

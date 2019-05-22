@@ -48,14 +48,6 @@ class AppiumExampleTest {
         Assert.assertEquals("This is dashboard Fragment", textView.text)
     }
 
-    @Test
-    fun `Navigate to notifications and assert text is displayed`() {
-        val notificationsIcon = driver.findElementById("navigation_notifications")
-        notificationsIcon.click()
-        val textView = driver.findElementById("text_notifications")
-        Assert.assertEquals("This is notifications Fragment", textView.text)
-    }
-
     @After
     fun tearDown() {
         driver.quit()

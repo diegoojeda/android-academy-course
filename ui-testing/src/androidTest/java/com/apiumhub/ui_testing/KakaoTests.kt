@@ -30,25 +30,14 @@ class KakaoTests {
             }
         }
     }
-
-    @Test
-    fun shouldClickNotificationsNavButtonAndAssertText() {
-        onScreen<HomeScreen> {
-            navigateToNotifications {
-                assertNotificationsText("This is notifications Fragment")
-            }
-        }
-    }
 }
 
 class HomeScreen : Screen<HomeScreen>() {
     val homeIcon = KView { withId(R.id.navigation_home) }
     val dashboardIcon = KView { withId(R.id.navigation_dashboard) }
-    val notificationsIcon = KView { withId(R.id.navigation_notifications) }
 
     val homeTextView = KTextView { withId(R.id.text_home) }
     val dashboardTextView = KTextView { withId(R.id.text_dashboard) }
-    val notificationsTextView = KTextView { withId(R.id.text_notifications) }
 
     fun navigateToHome(finishWith: (HomeScreen) -> Unit) {
         homeIcon { click() }
@@ -57,11 +46,6 @@ class HomeScreen : Screen<HomeScreen>() {
 
     fun navigateToDashboard(finishWith: (HomeScreen) -> Unit) {
         dashboardIcon { click() }
-        finishWith(this)
-    }
-
-    fun navigateToNotifications(finishWith: (HomeScreen) -> Unit) {
-        notificationsIcon { click() }
         finishWith(this)
     }
 
@@ -77,9 +61,4 @@ class HomeScreen : Screen<HomeScreen>() {
         }
     }
 
-    fun assertNotificationsText(text: String) {
-        notificationsTextView {
-            hasText(text)
-        }
-    }
 }

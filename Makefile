@@ -15,5 +15,3 @@ remove-fakeserver: stop-fakeserver
 
 unit-tests:
 	./gradlew testRobolectricDebugUnitTest
-
-instrumented-tests:

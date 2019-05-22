@@ -25,10 +25,4 @@ class EspressoTests {
         onView(withId(R.id.navigation_dashboard)).perform(click())
         onView(withId(R.id.text_dashboard)).check(matches(withText("This is dashboard Fragment")))
     }
-
-    @Test
-    fun shouldClickNotificationsNavButtonAndAssertText() {
-        onView(withId(R.id.navigation_notifications)).perform(click())
-        onView(withId(R.id.text_notifications)).check(matches(withText("This is notifications Fragment")))
-    }
 }
