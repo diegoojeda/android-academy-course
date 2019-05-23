@@ -30,7 +30,7 @@ class UsersRoomRepositoryTest {
         val context = ApplicationProvider.getApplicationContext<Context>()
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         userDao = db.userDao()
-        userRoomRepository = UsersRoomRepository(userDao, UserDbEntity::toDomain, User::toDbEntity)
+        userRoomRepository = UsersRoomRepository(userDao, UserDbEntity::toDomain)
     }
 
     @After

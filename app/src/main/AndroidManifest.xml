@@ -1,19 +1,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.apiumhub.androidarch">
+          package="com.apiumhub.androidarch">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
-        android:icon="@drawable/academy_logo"
-        android:label="@string/app_name"
-        android:roundIcon="@drawable/academy_logo"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+            android:allowBackup="true"
+            android:icon="@drawable/academy_logo"
+            android:label="@string/app_name"
+            android:roundIcon="@drawable/academy_logo"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            android:name=".AcademyApplication">
 
         <activity
-            android:name=".lesson_6.god.GodActivity"
-            android:label="AA">
+                android:name=".lesson_6.god.GodActivity"
+                android:label="AA">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +25,8 @@
         </activity>
 
         <activity
-            android:name=".lesson_6.mvp.PresenterActivity"
-            android:label="AA Presenter">
+                android:name=".lesson_6.mvp.PresenterActivity"
+                android:label="AA Presenter">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -35,14 +36,26 @@
 
 
         <activity
-            android:name=".lesson_6.mvvm.ViewModelActivity"
-            android:label="AA ViewModel"
-            android:screenOrientation="sensor">
+                android:name=".lesson_6.mvvm.ViewModelActivity"
+                android:label="AA ViewModel"
+                android:screenOrientation="sensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+                android:name=".lesson_8.ViewModelKoinActivity"
+                android:label="AA Koin"
+                android:screenOrientation="sensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
     </application>
 </manifest>
