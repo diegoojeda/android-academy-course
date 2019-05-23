@@ -2,10 +2,12 @@ package com.apiumhub.ui_testing
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
+import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.rule.ActivityTestRule
+import com.apiumhub.ui_testing.ui.LoggedInActivity
+import org.hamcrest.CoreMatchers.not
 import org.junit.Rule
 import org.junit.Test
 
@@ -25,4 +27,40 @@ class EspressoTests {
         onView(withId(R.id.navigation_dashboard)).perform(click())
         onView(withId(R.id.text_dashboard)).check(matches(withText("This is dashboard Fragment")))
     }
+
+    //region solutions
+
+    @Test
+    fun navigateToLoginTypeInvalidEmailAndCheckButtonIsDisabled() {
+        navigateToLogin()
+        onView(withId(R.id.login_username_et)).perform(replaceText("invalid email"))
+        assertSubmitButtonIsDisabled()
+    }
+
+    @Test
+    fun navigateToLoginTypeInvalidPasswordAndCheckButtonIsDisabled() {
+        navigateToLogin()
+        onView(withId(R.id.login_password_et)).perform(replaceText("1234"))
+        assertSubmitButtonIsDisabled()
+    }
+
+    @Test
+    fun navigateToLoginTypeValidCredentialsAndNavigateToNextScreen() {
+        navigateToLogin()
+        onView(withId(R.id.login_username_et)).perform(replaceText("someEmail@someDomain.com"))
+        onView(withId(R.id.login_password_et)).perform(replaceText("123456"))
+        onView(withId(R.id.login_submit_btn)).perform(click())
+        waitUntilActivityVisible<LoggedInActivity>()
+        onView(withId(R.id.logged_in_tv)).check(matches(withText("User someEmail@someDomain.com is logged in")))
+    }
+
+    private fun assertSubmitButtonIsDisabled() {
+        onView(withId(R.id.login_submit_btn)).check(matches(not(isEnabled())))
+    }
+
+    private fun navigateToLogin() {
+        onView(withId(R.id.navigation_login)).perform(click())
+    }
+
+    //endregion
 }
