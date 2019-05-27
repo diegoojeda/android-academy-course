@@ -21,7 +21,7 @@ class `4-Sequences` {
                 next = tmp
             }
         }
-        val actual = fibonacci.take(10).joinToString()
+        val actual = fibonacci.take(10).joinToString(separator = ", ")
         println(actual)
         Assert.assertEquals("1, 1, 2, 3, 5, 8, 13, 21, 34, 55", actual)
     }
