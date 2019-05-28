@@ -21,9 +21,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class PresenterActivity : AppCompatActivity(), PresenterSolution.Contract, CoroutineScope by MainScope() {
+class PresenterActivity : AppCompatActivity(), Presenter.Contract, CoroutineScope by MainScope() {
     private val presenter by lazy {
-        PresenterSolution(
+        Presenter(
             this,
             GetUsers(
                 UsersRetrofitRepository(UsersApi.create(), UserNetworkDto::toDomain),
@@ -55,6 +55,12 @@ class PresenterActivity : AppCompatActivity(), PresenterSolution.Contract, Corou
 
     override fun onError() {
         mainErrorTv.visibility = View.VISIBLE
+        mainErrorTv.text = "Oops, something went wrong! \\n Please try again later!"
+    }
+
+    override fun showNoConnectionError() {
+        mainErrorTv.visibility = View.VISIBLE
+        mainErrorTv.text = "No internet connection \\n Please try again later!"
     }
 
     override fun showLoading() {
