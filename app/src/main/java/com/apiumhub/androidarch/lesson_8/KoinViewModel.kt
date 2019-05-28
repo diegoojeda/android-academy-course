@@ -8,7 +8,6 @@ import com.apiumhub.androidarch.lesson_4.domain.GetUsers
 import com.apiumhub.androidarch.lesson_6.mvvm.ViewModelEvent
 import kotlinx.coroutines.launch
 
-
 class KoinViewModel(private val useCase: GetUsers): ViewModel() {
     private val usersMutable = MutableLiveData<ViewModelEvent>()
 
