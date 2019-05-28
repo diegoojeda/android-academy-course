@@ -13,10 +13,15 @@ class Presenter(
         fun onError()
         fun showLoading()
         fun hideLoading()
+        fun showNoConnectionError()
     }
 
     fun start() {
         //TODO
+    }
+
+    fun stop() {
+        ui = null
     }
 
 }
