@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".lesson_6.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,8 +19,21 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.LoggedInActivity"
+        <activity
+            android:name=".lesson_6.ui.LoggedInActivity"
             android:label="Logged In"/>
+
+        <activity
+            android:name=".lesson_7.UIComponentsActivity"
+            android:label="AA UI Components"
+            android:screenOrientation="sensor">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

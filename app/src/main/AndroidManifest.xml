@@ -13,7 +13,7 @@
             android:name=".AcademyApplication">
 
         <activity
-                android:name=".lesson_6.god.GodActivity"
+            android:name=".lesson_5.god.GodActivity"
                 android:label="AA">
 
             <intent-filter>
@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-                android:name=".lesson_6.mvp.PresenterActivity"
+            android:name=".lesson_5.mvp.PresenterActivity"
                 android:label="AA Presenter">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +36,7 @@
 
 
         <activity
-                android:name=".lesson_6.mvvm.ViewModelActivity"
+            android:name=".lesson_5.mvvm.ViewModelActivity"
                 android:label="AA ViewModel"
                 android:screenOrientation="sensor">
             <intent-filter>

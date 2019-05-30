@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.apiumhub.ui_testing.ui.home.HomeFragment"
+        android:name="com.apiumhub.ui_testing.lesson_6.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.apiumhub.ui_testing.ui.dashboard.DashboardFragment"
+        android:name="com.apiumhub.ui_testing.lesson_6.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_login"
-        android:name="com.apiumhub.ui_testing.ui.notifications.LoginFragment"
+        android:name="com.apiumhub.ui_testing.lesson_6.ui.notifications.LoginFragment"
         android:label="@string/title_login"
         tools:layout="@layout/fragment_login" />
 </navigation>

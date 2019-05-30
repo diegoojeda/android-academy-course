@@ -19,13 +19,13 @@ class `6-WhyCoroutines` {
     @Test
     fun fileProcessingWithThreadsAndCallbacks() {
         val countDownLatch = CountDownLatch(1)
-        val fos = FileInputStream(FILE_NAME)
-        getFileSizeInBackground(fos) {
+        val fis = FileInputStream(FILE_NAME)
+        getFileSizeInBackground(fis) {
             println("Finished processing file")
             println("Read $it bytes")
             countDownLatch.countDown()
         }
-        fos.close()
+        fis.close()
         countDownLatch.await(3, TimeUnit.SECONDS)
         if (hasNotEntered(countDownLatch)) {
             fail()
@@ -49,9 +49,9 @@ class `6-WhyCoroutines` {
      */
     @Test
     fun fileProcessingWithCoroutines() = runBlocking {
-        val fos = FileInputStream(FILE_NAME)
-        val bytes = getFileSizeWithCoroutines(fos)
-        fos.close()
+        val fis = FileInputStream(FILE_NAME)
+        val bytes = getFileSizeWithCoroutines(fis)
+        fis.close()
         println("Finished processing file")
         println("Read $bytes bytes")
     }

@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apiumhub.androidarch.lesson_4.domain.GetUsers
-import com.apiumhub.androidarch.lesson_6.mvvm.ViewModelEvent
+import com.apiumhub.androidarch.lesson_5.mvvm.ViewModelEvent
 import kotlinx.coroutines.launch
 
 class KoinViewModel(private val useCase: GetUsers): ViewModel() {

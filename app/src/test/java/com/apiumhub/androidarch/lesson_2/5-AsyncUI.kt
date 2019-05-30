@@ -12,14 +12,14 @@ class `5-AsyncUI` {
 
         @Test
         fun runOnUiThread() {
-            makeAsyncRequest { result ->
-                try {
+            try {
+                makeAsyncRequest { result ->
                     runOnUiThread {
                         textView.text = result
                     }
-                } catch (exception: IOException) {
-                    println("Failed")
                 }
+            } catch (exception: IOException) {
+                println("Failed")
             }
         }
 
