@@ -2,6 +2,7 @@ package com.apiumhub.androidarch.lesson_1
 
 import arrow.core.Either
 import arrow.core.Option
+import arrow.core.Try
 import arrow.core.getOrElse
 import org.junit.Test
 
@@ -29,9 +30,11 @@ class `6-Functional` {
     @Test
     fun flatMap() {
         val originalList = listOf(1, 2, 3, 4)
+        val otherList = originalList.map(::listSquared).flatten()
         val flatMapped = originalList.flatMap { lists -> listSquared(lists) }
         println("listOfLists: $originalList")
         println("FlatMapped: $flatMapped")
+        println("$otherList")
     }
 
     private fun listSquared(value: Int) =
@@ -40,7 +43,6 @@ class `6-Functional` {
     //endregion
 
     //region 4 - Monads
-
     @Test
     fun either() {
         val left = Either.left(Error())

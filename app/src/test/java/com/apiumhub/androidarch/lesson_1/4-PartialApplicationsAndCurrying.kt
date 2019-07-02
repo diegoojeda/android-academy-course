@@ -59,7 +59,7 @@ class `4-PartialApplicationsAndCurrying` {
 
     @Test
     fun curryingSum() {
-        val curried = ::sumToCurry.curried()
+        val curried: (a: Int) -> ((b: Int) -> Int) = ::sumToCurry.curried()
         Assert.assertEquals(sumToCurry(2, 3), curried(2)(3))
     }
 

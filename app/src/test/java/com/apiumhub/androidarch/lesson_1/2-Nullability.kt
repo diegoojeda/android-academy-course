@@ -20,7 +20,7 @@ class `2-Nullability` {
 
     @Test
     fun elvisAndLet() {
-        var a: String? = "Hello world"
+        var a: String? = null
         a?.let {
             assertEquals("Hello world", it)
         } ?: "Goodbye world"
