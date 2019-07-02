@@ -6,8 +6,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-class `3-BreakfastCoroutines` {
+class `3-TODOBreakfastCoroutines` {
 
+    //TODO Implement the same breakfast example but using coroutines
+
+    //region solution
     //region 1 - breakfast preparing synchronously with suspend functions
     /*
     suspend functions can be executed as regular synchronous functions. The function they're called
@@ -126,5 +129,6 @@ class `3-BreakfastCoroutines` {
         delay()
         return Juice()
     }
+    //endregion
     //endregion
 }

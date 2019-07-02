@@ -29,12 +29,9 @@ class `6-Functional` {
     @Test
     fun flatMap() {
         val originalList = listOf(1, 2, 3, 4)
-        val mapped = originalList.map { lists -> listSquared(lists) }
         val flatMapped = originalList.flatMap { lists -> listSquared(lists) }
         println("listOfLists: $originalList")
-        println("Mapped: $mapped")
         println("FlatMapped: $flatMapped")
-        println("Mapped flattened: ${mapped.flatten()}")
     }
 
     private fun listSquared(value: Int) =

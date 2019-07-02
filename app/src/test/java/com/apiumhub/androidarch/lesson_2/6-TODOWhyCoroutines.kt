@@ -10,7 +10,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.thread
 
-class `6-WhyCoroutines` {
+class `6-TODOWhyCoroutines` {
 
     /*
     In this case, we might not know what does "getFileSizeWithCoroutines" does, we can close the FileInputStream right after the function
@@ -42,6 +42,9 @@ class `6-WhyCoroutines` {
         }
     }
 
+    //TODO Given the previous example, create an implementation using coroutines
+
+    //region solution
     /*
     By using coroutines, we can make the whole code look sequential. But not only this, the point in this example is that,
     by the time we close the FileOutputStream, we are 100% sure that the whole processing inside "getFileSizeWithCoroutines"
@@ -69,6 +72,8 @@ class `6-WhyCoroutines` {
             println("Read $bytes bytes")
         }
     }
+
+    //endregion
 
     companion object {
         const val FILE_NAME = "example.txt"
