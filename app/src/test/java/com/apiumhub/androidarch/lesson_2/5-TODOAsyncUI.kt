@@ -5,7 +5,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import java.io.IOException
 
-class `5-AsyncUI` {
+class `5-TODOAsyncUI` {
 
     class AsyncUiWithListeners {
         private val textView = SomeTextView()
@@ -35,6 +35,7 @@ class `5-AsyncUI` {
         }
     }
 
+    //region solution
     class AsyncUICoroutines {
 
         private val textView = SomeTextView()
@@ -61,6 +62,8 @@ class `5-AsyncUI` {
             return "Some result"
         }
     }
+
+    //endregion
 
     /*
     Dummy class that represents an Android TextView

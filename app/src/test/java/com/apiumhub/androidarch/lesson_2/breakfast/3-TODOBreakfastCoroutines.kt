@@ -10,6 +10,44 @@ class `3-TODOBreakfastCoroutines` {
 
     //TODO Implement the same breakfast example but using coroutines
 
+    //region common
+    private suspend fun pourCoffee(): Coffee {
+        delay()
+        return Coffee()
+    }
+
+    private suspend fun fryEggs(amount: Int): Egg {
+        delay(amount)
+        return Egg()
+    }
+
+    private suspend fun fryBacon(slices: Int): Bacon {
+        delay(slices)
+        return Bacon()
+    }
+
+    private suspend fun toastBread(slices: Int): ToastWithJamAndButter {
+        delay(slices)
+        val plainToast = Toast()
+        val toastWithButter = applyButter(plainToast)
+        return applyJam(toastWithButter)
+    }
+
+    private suspend fun applyButter(toast: Toast): ToastWithButter {
+        delay()
+        return ToastWithButter()
+    }
+
+    private suspend fun applyJam(toast: ToastWithButter): ToastWithJamAndButter {
+        delay()
+        return ToastWithJamAndButter()
+    }
+
+    private suspend fun pourOrangeJuice(): Juice {
+        delay()
+        return Juice()
+    }
+
     //region solution
     //region 1 - breakfast preparing synchronously with suspend functions
     /*
@@ -92,43 +130,7 @@ class `3-TODOBreakfastCoroutines` {
     }
     //endregion
 
-    //region common
 
-    private suspend fun pourCoffee(): Coffee {
-        delay()
-        return Coffee()
-    }
-
-    private suspend fun fryEggs(amount: Int): Egg {
-        delay(amount)
-        return Egg()
-    }
-
-    private suspend fun fryBacon(slices: Int): Bacon {
-        delay(slices)
-        return Bacon()
-    }
-
-    private suspend fun toastBread(slices: Int): Toast {
-        delay(slices)
-        val plainToast = Toast()
-        applyButter(plainToast)
-        applyJam(plainToast)
-        return plainToast
-    }
-
-    private suspend fun applyButter(toast: Toast) {
-        delay()
-    }
-
-    private suspend fun applyJam(toast: Toast) {
-        delay()
-    }
-
-    private suspend fun pourOrangeJuice(): Juice {
-        delay()
-        return Juice()
-    }
     //endregion
-    //endregion
+
 }

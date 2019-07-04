@@ -16,8 +16,8 @@ class `1-BreakfastSequentially` {
         fryBacon(3)
         println("bacon is ready")
         val toast = toastBread(2)
-        applyButter(toast)
-        applyJam(toast)
+        val toastWithButter = applyButter(toast)
+        applyJam(toastWithButter)
         println("toast is ready")
         pourOrangeJuice()
         println("orange juice is ready")
@@ -44,12 +44,14 @@ class `1-BreakfastSequentially` {
         return Toast()
     }
 
-    private fun applyButter(toast: Toast) {
+    private fun applyButter(toast: Toast): ToastWithButter {
         sleep()
+        return ToastWithButter()
     }
 
-    private fun applyJam(toast: Toast) {
+    private fun applyJam(toast: ToastWithButter): ToastWithJamAndButter {
         sleep()
+        return ToastWithJamAndButter()
     }
 
     private fun pourOrangeJuice(): Juice {

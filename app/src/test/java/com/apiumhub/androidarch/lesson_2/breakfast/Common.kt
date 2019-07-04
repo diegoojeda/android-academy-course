@@ -8,6 +8,8 @@ class Egg
 class Bacon
 class Juice
 class Toast
+class ToastWithButter
+class ToastWithJamAndButter
 
 fun sleep(seconds: Int = 1) {
 //    println("Running on ${Thread.currentThread().name}")

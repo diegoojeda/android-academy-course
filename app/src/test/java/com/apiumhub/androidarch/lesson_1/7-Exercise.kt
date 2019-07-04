@@ -27,13 +27,37 @@ Make the following tests green!
  */
 
 object Implementation {
-    fun getAverageGradeForEachDepartment(students: List<Student>): Map<Student.Department, Double> = TODO()
+    fun getAverageGradeForEachDepartment(students: List<Student>): Map<Student.Department, Double> =
+        students
+            .groupBy { it.department }
+            .mapValues {
+                it.value
+                    .map { it.grade }
+                    .average()
+            }
 
-    fun getNumberOfStudentsByDepartment(students: List<Student>): Map<Student.Department, Int> = TODO()
+    fun getNumberOfStudentsByDepartment(students: List<Student>): Map<Student.Department, Int> =
+        students
+            .groupBy { it.department }
+            .mapValues { it.value.count() }
 
-    fun getNameOfStudentsByDepartment(students: List<Student>): Map<Student.Department, List<String>> = TODO()
+    fun getNameOfStudentsByDepartment(students: List<Student>): Map<Student.Department, List<String>> =
+        students
+            .groupBy { it.department }
+            .mapValues { it.value.map { it.name } }
 
-    fun getNumberOfStudentsByGenderForEachDepartment(students: List<Student>): Map<Student.Department, Map<Student.Gender, Int>> = TODO()
+    fun getNumberOfStudentsByGenderForEachDepartment(students: List<Student>): Map<Student.Department, Map<Student.Gender, Int>> =
+        students
+            .groupBy { it.department }
+            .mapValues {
+                it.value
+                    .groupBy {
+                        it.gender
+                    }
+                    .mapValues {
+                        it.value.count()
+                    }
+            }
 }
 
 class Tests {
@@ -92,8 +116,7 @@ class Tests {
                 Student.Gender.FEMALE to 1
             ),
             Student.Department.SCIENCES to mapOf(
-                Student.Gender.MALE to 3,
-                Student.Gender.FEMALE to 0
+                Student.Gender.MALE to 3
             )
         )
         assertThat(Implementation.getNumberOfStudentsByGenderForEachDepartment(students)).isEqualTo(expected)

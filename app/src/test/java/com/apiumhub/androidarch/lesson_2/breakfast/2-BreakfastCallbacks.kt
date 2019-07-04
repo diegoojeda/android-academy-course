@@ -6,7 +6,7 @@ class `2-BreakfastCallbacks` {
     private lateinit var coffee: Coffee
     private lateinit var eggs: Egg
     private lateinit var bacon: Bacon
-    private lateinit var toast: Toast
+    private lateinit var toast: ToastWithJamAndButter
     private lateinit var juice: Juice
 
     /*
@@ -77,14 +77,14 @@ class `2-BreakfastCallbacks` {
         }.start()
     }
 
-    private fun applyButter(toast: Toast, func: (Toast) -> Unit) {
+    private fun applyButter(toast: Toast, func: (ToastWithButter) -> Unit) {
         sleep()
-        func(toast)
+        func(ToastWithButter())
     }
 
-    private fun applyJam(toast: Toast, func: (Toast) -> Unit) {
+    private fun applyJam(toast: ToastWithButter, func: (ToastWithJamAndButter) -> Unit) {
         sleep()
-        func(toast)
+        func(ToastWithJamAndButter())
     }
 
     private fun pourOrangeJuice(func: (juice: Juice) -> Unit) {
