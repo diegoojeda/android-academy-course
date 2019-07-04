@@ -28,7 +28,7 @@ class CoroutinesActivity : AppCompatActivity() {
                 Log.d("Coroutines", "This will run when activity is resumed")
             }
             Log.d("Coroutines", "This will run after activity's onResume")
-//            updateUI()
+            updateUI()
         }
         //TODO Try to move this code inside the constructor!
     }

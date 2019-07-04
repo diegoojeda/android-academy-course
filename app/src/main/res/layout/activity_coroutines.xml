@@ -5,9 +5,12 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="30sp"
         android:id="@+id/coroutinesTv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:textStyle="bold"
         android:text="Default text" />
 
 </LinearLayout>
