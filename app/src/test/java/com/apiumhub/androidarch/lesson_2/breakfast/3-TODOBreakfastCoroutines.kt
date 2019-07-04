@@ -47,6 +47,7 @@ class `3-TODOBreakfastCoroutines` {
         delay()
         return Juice()
     }
+    //endregion
 
     //region solution
     //region 1 - breakfast preparing synchronously with suspend functions
