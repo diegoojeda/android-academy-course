@@ -8,15 +8,16 @@ import androidx.lifecycle.whenResumed
 import androidx.lifecycle.whenStarted
 import com.apiumhub.androidarch.R
 import kotlinx.android.synthetic.main.activity_coroutines.*
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
-class CoroutinesActivity : AppCompatActivity() {
+class CoroutinesActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coroutines)
-        Log.d("Coroutines", "This will run at the very beginning")
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
+    }
+
+    init {
         lifecycleScope.launch {
             whenStarted {
                 delay(1000)
@@ -30,6 +31,13 @@ class CoroutinesActivity : AppCompatActivity() {
             Log.d("Coroutines", "This will run after activity's onResume")
             updateUI()
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_coroutines)
+        Log.d("Coroutines", "This will run at the very beginning")
+
         //TODO Try to move this code inside the constructor!
     }
 

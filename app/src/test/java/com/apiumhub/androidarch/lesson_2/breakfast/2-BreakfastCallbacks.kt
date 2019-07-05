@@ -37,9 +37,9 @@ class `2-BreakfastCallbacks` {
             applyButter(plainToast) { toastWithButter ->
                 applyJam(toastWithButter) { toastWithJam ->
                     toast = toastWithJam
+                    println("toast is ready")
                 }
             }
-            println("toast is ready")
         }
         pourOrangeJuice {
             println("orange juice is ready")

@@ -4,6 +4,7 @@ import com.apiumhub.androidarch.lesson_2.breakfast.delay
 import com.apiumhub.androidarch.lesson_2.breakfast.sleep
 import junit.framework.TestCase.fail
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import org.junit.Test
 import java.io.FileInputStream
 import java.util.concurrent.CountDownLatch
@@ -43,6 +44,20 @@ class `6-TODOWhyCoroutines` {
     }
 
     //TODO Given the previous example, create an implementation using coroutines
+
+    @Test
+    fun readFileSizeWithCoroutines() = runBlocking {
+        val fis = FileInputStream(FILE_NAME)
+        val size = readFileCoroutines(fis)
+        println("Read $size bytes")
+        fis.close()
+    }
+
+
+    private suspend fun readFileCoroutines(fis: FileInputStream): Int {
+        delay(1)
+        return fis.read()
+    }
 
     //region solution
     /*

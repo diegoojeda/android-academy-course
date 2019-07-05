@@ -1,6 +1,7 @@
 package com.apiumhub.androidarch.lesson_2
 
 import com.apiumhub.androidarch.lesson_2.breakfast.delay
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import java.io.IOException
@@ -28,6 +29,33 @@ class `5-TODOAsyncUI` {
             Thread.sleep(1000)
             //Maybe throw some exception here if needed.
             listener("Some result")
+        }
+
+        private fun runOnUiThread(func: () -> Unit) {
+            func()
+        }
+    }
+
+    class Coroutines {
+        private val textView = SomeTextView()
+
+        @Test
+        fun runOnUiThread() = runBlocking(Dispatchers.Main) {
+            try {
+                val result = makeAsyncRequest()
+                textView.text = result
+                println("Finished")
+            } catch (e: IOException) {
+                println("Error")
+            }
+            Unit
+        }
+
+
+        @Throws(IOException::class)
+        private suspend fun makeAsyncRequest(): String {
+            delay(1)
+            return "Hello world!"
         }
 
         private fun runOnUiThread(func: () -> Unit) {
@@ -63,7 +91,7 @@ class `5-TODOAsyncUI` {
         }
     }
 
-    //endregion
+//endregion
 
     /*
     Dummy class that represents an Android TextView

@@ -10,9 +10,82 @@ class `3-TODOBreakfastCoroutines` {
 
     //TODO Implement the same breakfast example but using coroutines
 
+    @Test
+    fun `breakfast coroutines sequentially`() = runBlocking {
+        pourCoffee()
+        println("Coffee is ready")
+        fryEggs(2)
+        println("Eggs are ready")
+//        fryBacon(2)
+//        println("Bacon is ready")
+//        val toast = toastBread(2)
+//        val toastWithButter = applyButter(toast)
+//        applyJam(toastWithButter)
+//        println("Toasts are ready")
+//        pourOrangeJuice()
+//        println("OJ is ready")
+        Unit
+    }
+
+    @Test
+    fun `breakfast sequentially asynchronous`() = runBlocking {
+        val coffeeJob = launch {
+            println("Starting coffee")
+            pourCoffee()
+            println("Coffee is ready")
+        }
+        val eggsJob = launch {
+            println("Starting eggs")
+            fryEggs(2)
+            println("Eggs are ready")
+        }
+        val toastsJob = launch {
+            val bread = toastBread(2)
+        }
+        //.....
+        coffeeJob.join()
+        eggsJob.join()
+        toastsJob.join()
+    }
+
+    @Test
+    fun `breakfast async awaiting`() = runBlocking {
+        val coffeeAsync = launch {
+            println("Started coffee")
+            pourCoffee()
+            println("Finished coffee")
+        }
+        val eggsAsync = launch {
+            println("Started eggs")
+            fryEggs(2)
+            println("Finished eggs")
+        }
+        val toastAsync = async {
+            println("Started toasts")
+            val toast = toastBread(2)
+            println("Finished toasts")
+            return@async toast
+        }
+
+        val toast = toastAsync.await()
+        val toastWithButterAsync = async { applyButter(toast) }
+        val toastWithButter = toastWithButterAsync.await()
+        val toastWithJamAndButterAsync = launch { applyJam(toastWithButter) }
+
+
+
+        coffeeAsync.join()
+        println("Coffee ready")
+        eggsAsync.join()
+        println("Eggs ready")
+        toastWithJamAndButterAsync.join()
+        println("Toasts are ready")
+
+    }
+
     //region common
     private suspend fun pourCoffee(): Coffee {
-        delay()
+        delay(10)
         return Coffee()
     }
 
@@ -26,11 +99,9 @@ class `3-TODOBreakfastCoroutines` {
         return Bacon()
     }
 
-    private suspend fun toastBread(slices: Int): ToastWithJamAndButter {
+    private suspend fun toastBread(slices: Int): Toast {
         delay(slices)
-        val plainToast = Toast()
-        val toastWithButter = applyButter(plainToast)
-        return applyJam(toastWithButter)
+        return Toast()
     }
 
     private suspend fun applyButter(toast: Toast): ToastWithButter {
