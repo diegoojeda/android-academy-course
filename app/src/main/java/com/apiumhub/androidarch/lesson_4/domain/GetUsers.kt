@@ -9,7 +9,6 @@ class GetUsers(
     private val networkRepository: UsersRetrofitRepository,
     private val databaseRepository: UsersRoomRepository
 ) {
-    suspend fun execute(): Try<List<User>> {
-        return networkRepository.getAll()
-    }
+    fun execute(): Try<List<User>> =
+        TODO()
 }

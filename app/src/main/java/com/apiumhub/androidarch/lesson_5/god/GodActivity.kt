@@ -6,13 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.apiumhub.androidarch.AppDb
 import com.apiumhub.androidarch.R
-import com.apiumhub.androidarch.lesson_4.data.db.UserDbEntity
 import com.apiumhub.androidarch.lesson_4.data.db.UsersRoomRepository
-import com.apiumhub.androidarch.lesson_4.data.db.toDomain
 import com.apiumhub.androidarch.lesson_4.data.network.UsersApi
 import com.apiumhub.androidarch.lesson_4.data.network.UsersRetrofitRepository
-import com.apiumhub.androidarch.lesson_4.data.network.dto.UserNetworkDto
-import com.apiumhub.androidarch.lesson_4.data.network.toDomain
 import com.apiumhub.androidarch.lesson_4.domain.GetUsers
 import com.apiumhub.androidarch.lesson_4.domain.exception.NoInternetConnectionException
 import com.apiumhub.androidarch.lesson_5.common.MainAdapter
@@ -28,8 +24,8 @@ class GodActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     network and database clients are used directly, which makes us implement a lot of business logic inside the activity
      */
     private val getUsers = GetUsers(
-        UsersRetrofitRepository(UsersApi.create(), UserNetworkDto::toDomain),
-        UsersRoomRepository(AppDb.getDb().userDao(), UserDbEntity::toDomain)
+        UsersRetrofitRepository(UsersApi.create()),
+        UsersRoomRepository(AppDb.getDb().userDao())
     )
 
     private val adapter = MainAdapter()

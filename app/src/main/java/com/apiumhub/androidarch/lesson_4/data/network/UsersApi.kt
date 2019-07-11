@@ -9,7 +9,7 @@ import retrofit2.http.GET
 
 interface UsersApi {
     @GET("/users")
-    fun getUsersListAsync(): Deferred<List<UserNetworkDto>>
+    fun getUsersList(): List<UserNetworkDto>
 
     companion object {
         fun create(): UsersApi = Retrofit

@@ -3,13 +3,9 @@ package com.apiumhub.androidarch.lesson_8
 import androidx.room.Room
 import com.apiumhub.androidarch.AppDatabase
 import com.apiumhub.androidarch.DATA_BASE_NAME
-import com.apiumhub.androidarch.lesson_4.data.db.UserDbEntity
 import com.apiumhub.androidarch.lesson_4.data.db.UsersRoomRepository
-import com.apiumhub.androidarch.lesson_4.data.db.toDomain
 import com.apiumhub.androidarch.lesson_4.data.network.UsersApi
 import com.apiumhub.androidarch.lesson_4.data.network.UsersRetrofitRepository
-import com.apiumhub.androidarch.lesson_4.data.network.dto.UserNetworkDto
-import com.apiumhub.androidarch.lesson_4.data.network.toDomain
 import com.apiumhub.androidarch.lesson_4.domain.GetUsers
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -62,9 +58,9 @@ val apisModule = module {
 
 val repositoriesModule = module {
     single {
-        UsersRoomRepository(get<AppDatabase>().userDao(), UserDbEntity::toDomain)
+        UsersRoomRepository(get<AppDatabase>().userDao())
     }
     single {
-        UsersRetrofitRepository(get(), UserNetworkDto::toDomain)
+        UsersRetrofitRepository(get())
     }
 }

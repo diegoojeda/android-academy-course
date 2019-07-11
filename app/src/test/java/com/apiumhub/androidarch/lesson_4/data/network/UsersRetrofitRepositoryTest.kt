@@ -1,7 +1,6 @@
 package com.apiumhub.androidarch.lesson_4.data.network
 
 import arrow.core.getOrElse
-import com.apiumhub.androidarch.lesson_4.data.network.dto.UserNetworkDto
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import junit.framework.TestCase.assertFalse
 import kotlinx.coroutines.runBlocking
@@ -24,7 +23,7 @@ class UsersRetrofitRepositoryTest {
 
     @Before
     fun setup() {
-        sut = UsersRetrofitRepository(api, UserNetworkDto::toDomain)
+        sut = UsersRetrofitRepository(api)
     }
 
     @Test
