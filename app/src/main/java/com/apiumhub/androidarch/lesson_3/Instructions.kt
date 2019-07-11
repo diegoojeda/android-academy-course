@@ -21,10 +21,22 @@ class MoveForward : Instruction {
     private val moves = HashMap<Orientation, (Position) -> Position>()
 
     init {
-        TODO("Fill moves map with position changing when moving on any orientation")
+        moves[Orientation.NORTH] = {
+            it.copy(y = it.y+1)
+        }
+        moves[Orientation.SOUTH] = {
+            it.copy(y = it.y-1)
+        }
+        moves[Orientation.EAST] = {
+            it.copy(x = it.x + 1)
+        }
+        moves[Orientation.WEST] = {
+            it.copy(x = it.x-1)
+        }
     }
 
     override fun apply(position: Position): Position {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val function = moves.get(position.orientation)!!
+        return function(position)
     }
 }

@@ -8,6 +8,20 @@ enum class Orientation {
     EAST,
     WEST;
 
-    fun left(): Orientation = TODO()
-    fun right(): Orientation = TODO()
+    fun left(): Orientation{
+        return when(this){
+            WEST -> SOUTH
+            EAST -> NORTH
+            NORTH -> WEST
+            SOUTH -> EAST
+        }
+    }
+    fun right(): Orientation {
+        return when(this){
+            WEST -> NORTH
+            EAST -> SOUTH
+            NORTH -> EAST
+            SOUTH -> WEST
+        }
+    }
 }
