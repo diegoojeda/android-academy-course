@@ -1,8 +1,6 @@
 package com.apiumhub.androidarch.lesson_4.data.network
 
-import arrow.core.getOrElse
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import junit.framework.TestCase.assertFalse
+import junit.framework.TestCase.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -14,7 +12,6 @@ class UsersRetrofitRepositoryTest {
     private val api: UsersApi = Retrofit
         .Builder()
         .baseUrl("https://apiumacademy.serveo.net")
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(UsersApi::class.java)
@@ -28,8 +25,10 @@ class UsersRetrofitRepositoryTest {
 
     @Test
     fun shouldReadUsersFromNetwork() = runBlocking {
-        val users = sut.getAll().getOrElse { emptyList() }
-        assertFalse(users.isEmpty())
+        val actual = sut.getAll()
+
+        assertTrue(actual.isSuccess())
+
         Unit
     }
 }

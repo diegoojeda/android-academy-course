@@ -7,7 +7,6 @@ import com.apiumhub.androidarch.lesson_4.data.db.UsersRoomRepository
 import com.apiumhub.androidarch.lesson_4.data.network.UsersApi
 import com.apiumhub.androidarch.lesson_4.data.network.UsersRetrofitRepository
 import com.apiumhub.androidarch.lesson_4.domain.GetUsers
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -21,7 +20,6 @@ val networkModule = module {
             .Builder()
             .baseUrl("https://apiumacademy.serveo.net")
             .client(get())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

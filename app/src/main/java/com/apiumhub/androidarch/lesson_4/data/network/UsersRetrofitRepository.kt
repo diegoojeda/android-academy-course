@@ -9,7 +9,7 @@ import com.apiumhub.androidarch.lesson_4.domain.repositories.ReadRepository
 class UsersRetrofitRepository(
     private val usersApi: UsersApi
 ) : ReadRepository<User> {
-    override suspend fun getAll(): Try<List<User>> = TODO()
+    override suspend fun getAll(): Try<List<User>> = Try.just(usersApi.getUsersList().filterMapInternal(UserNetworkDto::toDomain))
 
     /*
     Utility method that extends an Iterable of UserNetworkDto, and returns a list containing the result of mapping each
