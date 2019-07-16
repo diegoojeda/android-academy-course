@@ -51,7 +51,7 @@ class PresenterActivity : AppCompatActivity(), Presenter.Contract, CoroutineScop
         adapter.update(users)
     }
 
-    override fun onError() {
+    override fun showGenericError() {
         mainErrorTv.visibility = View.VISIBLE
         mainErrorTv.text = "Oops, something went wrong! \\n Please try again later!"
     }

@@ -44,8 +44,8 @@ class GodActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         launch {
             getUsers.execute().fold({
                 when(it) {
-                    is NoInternetConnectionException -> noInternetError()
-                    else -> unknownError()
+                    is NoInternetConnectionException -> showNoConnectionError()
+                    else -> showGenericError()
                 }
             },{
                 adapter.update(it)
@@ -55,12 +55,12 @@ class GodActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }
     }
 
-    private fun noInternetError() {
+    private fun showNoConnectionError() {
         mainErrorTv.visibility = View.VISIBLE
         mainErrorTv.text = "No internet connection \\n Please try again later!"
     }
 
-    private fun unknownError() {
+    private fun showGenericError() {
         mainErrorTv.visibility = View.VISIBLE
         mainErrorTv.text = "Oops, something went wrong! \\n Please try again later!"
     }

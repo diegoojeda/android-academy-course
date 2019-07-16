@@ -10,7 +10,7 @@ class Presenter(
     interface Contract {
         fun onDataLoaded(users: List<User>)
         fun hideError()
-        fun onError()
+        fun showGenericError()
         fun showLoading()
         fun hideLoading()
         fun showNoConnectionError()

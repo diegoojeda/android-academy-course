@@ -16,7 +16,7 @@ class PresenterSolution(
     private fun showError(error: Throwable) {
         when (error) {
             is NoInternetConnectionException -> ui?.showNoConnectionError()
-            else -> ui?.onError()
+            else -> ui?.showGenericError()
         }
         ui?.hideLoading()
     }

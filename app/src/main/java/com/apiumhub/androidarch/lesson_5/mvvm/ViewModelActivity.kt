@@ -16,12 +16,12 @@ import kotlinx.coroutines.MainScope
 class ViewModelActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     private val adapter = MainAdapter()
-    private lateinit var viewModel: ViewModelSolution
+    private lateinit var viewModel: ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_layout)
-        viewModel = ViewModelProviders.of(this).get(ViewModelSolution::class.java)
+        viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
         mainRecyclerView.adapter = adapter
         mainRecyclerView.layoutManager = LinearLayoutManager(this)
         mainRetryBtn.setOnClickListener { viewModel.retry() }
