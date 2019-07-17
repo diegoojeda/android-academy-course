@@ -5,26 +5,30 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apiumhub.androidarch.AppDb
-import com.apiumhub.androidarch.lesson_4.data.db.UserDbEntity
 import com.apiumhub.androidarch.lesson_4.data.db.UsersRoomRepository
 import com.apiumhub.androidarch.lesson_4.data.network.UsersApi
 import com.apiumhub.androidarch.lesson_4.data.network.UsersRetrofitRepository
-import com.apiumhub.androidarch.lesson_4.data.network.dto.UserNetworkDto
 import com.apiumhub.androidarch.lesson_4.domain.GetUsers
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ViewModel : ViewModel() {
-    private val getUsers = GetUsers(
-        UsersRetrofitRepository(UsersApi.create()),
-        UsersRoomRepository(AppDb.getDb().userDao())
-    )
+class ViewModel(
+    private val getUsers: GetUsers =
+        GetUsers(
+            UsersRetrofitRepository(UsersApi.create()),
+            UsersRoomRepository(AppDb.getDb().userDao())
+        ),
+    private val dispatcher: CoroutineDispatcher = Dispatchers.Main
+
+) : ViewModel() {
 
     private val usersMutable = MutableLiveData<ViewModelEvent>()
 
     val users: LiveData<ViewModelEvent> = usersMutable
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             getData()
         }
     }
