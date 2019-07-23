@@ -6,4 +6,9 @@
 
 
     <string name="logged_in">User %s is logged in</string>
+
+    <string name="follow">Follow</string>
+    <string name="following">Following</string>
+
+    <string name="description">Description for %s</string>
 </resources>

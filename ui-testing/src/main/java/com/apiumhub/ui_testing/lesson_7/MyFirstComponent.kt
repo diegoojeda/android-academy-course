@@ -12,10 +12,21 @@ class MyFirstComponent @JvmOverloads constructor(context: Context, attrs: Attrib
 
     init {
         View.inflate(context, R.layout.my_first_component, this)
-        val resources = context.obtainStyledAttributes(attrs, R.styleable.MyFirstComponent, defStyleAttr, 0)
-//        val attribute = resources.getString(R.styleable.MyFirstComponent_my_flag_attr) ?: "default value"
-        resources.recycle()
+        val resourcesInternal = context.obtainStyledAttributes(attrs, R.styleable.MyFirstComponent, defStyleAttr, 0)
+        val attribute = resourcesInternal.getString(R.styleable.MyFirstComponent_my_flag_attr) ?: "default value"
+        resourcesInternal.recycle()
+
+        firstComponentBtn.setOnClickListener {
+            firstComponentBtn.text =
+                if (firstComponentBtn.text == resources.getString(R.string.follow))
+                    resources.getString(R.string.following)
+                else
+                    resources.getString(R.string.follow)
+        }
     }
 
-
+    fun updateUsername(newUsername: String) {
+        firstComponentDescription.text = String.format(resources.getString(R.string.description), newUsername)
+        firstComponentUsername.text = newUsername
+    }
 }

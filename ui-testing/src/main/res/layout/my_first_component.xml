@@ -1,46 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+<merge xmlns:tools="http://schemas.android.com/tools">
 
-    <Button
-        android:id="@+id/firstComponentBtn"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="Follow" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/academy_logo" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp">
-
-        <TextView
-            android:id="@+id/firstComponentUsername"
-            style="@style/H6"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/firstComponentBtn"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="Username" />
+            android:text="@string/follow" />
 
-        <TextView
-            android:id="@+id/firstComponentDescription"
-            style="@style/Body"
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/academy_logo" />
+
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:text="Description for Username" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+
+            <TextView
+                android:id="@+id/firstComponentUsername"
+                style="@style/H6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Username" />
+
+            <TextView
+                android:id="@+id/firstComponentDescription"
+                style="@style/Body"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Description for Username" />
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</merge>

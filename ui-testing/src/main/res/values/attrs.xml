@@ -3,4 +3,10 @@
     <declare-styleable name="MyFirstComponent">
         <attr name="my_flag_attr" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="HexPicker">
+
+        <attr name="color" format="color"/>
+
+    </declare-styleable>
 </resources>
