@@ -35,59 +35,85 @@ class KakaoTests {
         }
     }
 
-
-    //region solutions
-
     @Test
-    fun navigateToLoginTypeInvalidEmailAndCheckButtonIsDisabled() {
+    fun submit_button_should_be_disabled_when_email_is_invalid() {
         onScreen<HomeScreen> {
             navigateToLogin {
-                typeUsername("invalid username")
-                submitBtn.isDisabled()
+                typeEmail("invalidEmail")
+                checkSubmitButtonDisabled()
             }
         }
     }
 
     @Test
-    fun navigateToLoginTypeInvalidPasswordAndCheckButtonIsDisabled() {
+    fun should_navigate_when_email_and_password_are_valid_and_submit_is_clicked() {
         onScreen<HomeScreen> {
             navigateToLogin {
-                typePassword("1234")
-                submitBtn.isDisabled()
-            }
-        }
-    }
-
-    @Test
-    fun navigateToLoginTypeValidCredentialsAndNavigateToNextScreen() {
-        onScreen<HomeScreen> {
-            navigateToLogin {
-                typeUsername("someEmail@someDomain.com")
+                typeEmail("email@domain.com")
                 typePassword("123456")
-                submitBtn.isEnabled()
-                submitBtn.click()
+                clickSubmit()
             }
         }
         waitUntilActivityVisible<LoggedInActivity>()
-        onScreen<LoggedInScreen> {
-            assertTvShowsUsername("someEmail@someDomain.com")
-        }
 
+        onScreen<LoggedInScreen> {
+            checkTvContains("email@domain.com")
+        }
     }
+
+    //region solutions
+//
+//    @Test
+//    fun navigateToLoginTypeInvalidEmailAndCheckButtonIsDisabled() {
+//        onScreen<HomeScreen> {
+//            navigateToLogin {
+//                typeUsername("invalid username")
+//                submitBtn.isDisabled()
+//            }
+//        }
+//    }
+//
+//    @Test
+//    fun navigateToLoginTypeInvalidPasswordAndCheckButtonIsDisabled() {
+//        onScreen<HomeScreen> {
+//            navigateToLogin {
+//                typePassword("1234")
+//                submitBtn.isDisabled()
+//            }
+//        }
+//    }
+//
+//    @Test
+//    fun navigateToLoginTypeValidCredentialsAndNavigateToNextScreen() {
+//        onScreen<HomeScreen> {
+//            navigateToLogin {
+//                typeUsername("someEmail@someDomain.com")
+//                typePassword("123456")
+//                submitBtn.isEnabled()
+//                submitBtn.click()
+//            }
+//        }
+//        waitUntilActivityVisible<LoggedInActivity>()
+//        onScreen<LoggedInScreen> {
+//            assertTvShowsUsername("someEmail@someDomain.com")
+//        }
+//
+//    }
     //endregion
 }
 
 class HomeScreen : Screen<HomeScreen>() {
     val homeIcon = KView { withId(R.id.navigation_home) }
     val dashboardIcon = KView { withId(R.id.navigation_dashboard) }
-    val loginIcon = KView {withId(R.id.navigation_login)}
+    val loginIcon = KView { withId(R.id.navigation_login) }
 
     val homeTextView = KTextView { withId(R.id.text_home) }
     val dashboardTextView = KTextView { withId(R.id.text_dashboard) }
 
-    private val usernameField = KEditText {withId(R.id.login_username_et)}
-    private val passwordField = KEditText {withId(R.id.login_password_et)}
-    val submitBtn = KButton {withId(R.id.login_submit_btn)}
+    val emailEditText = KEditText { withId(R.id.login_username_et) }
+    val passwordEditText = KEditText { withId(R.id.login_password_et) }
+
+    val submitBtn = KButton { withId(R.id.login_submit_btn) }
 
     fun navigateToHome(finishWith: (HomeScreen) -> Unit) {
         homeIcon { click() }
@@ -100,8 +126,24 @@ class HomeScreen : Screen<HomeScreen>() {
     }
 
     fun navigateToLogin(finishWith: (HomeScreen) -> Unit) {
-        loginIcon {click()}
+        loginIcon { click() }
         finishWith(this)
+    }
+
+    fun typeEmail(email: String) {
+        emailEditText.typeText(email)
+    }
+
+    fun typePassword(password: String) {
+        passwordEditText.typeText(password)
+    }
+
+    fun checkSubmitButtonDisabled() {
+        submitBtn.isDisabled()
+    }
+
+    fun clickSubmit() {
+        submitBtn.click()
     }
 
     fun assertHomeText(text: String) {
@@ -115,23 +157,13 @@ class HomeScreen : Screen<HomeScreen>() {
             hasText(text)
         }
     }
-
-    fun typeUsername(username: String) {
-        usernameField.replaceText(username)
-    }
-
-    fun typePassword(password: String) {
-        passwordField.replaceText(password)
-    }
-
 }
 
 class LoggedInScreen: Screen<LoggedInScreen>() {
-    val infoTv = KTextView {withId(R.id.logged_in_tv)}
+    val userTextView = KTextView { withId(R.id.logged_in_tv) }
 
-    fun assertTvShowsUsername(username: String) {
-        infoTv {
-            hasText("User $username is logged in")
-        }
+    fun checkTvContains(text: String) {
+        userTextView.containsText(text)
     }
+
 }

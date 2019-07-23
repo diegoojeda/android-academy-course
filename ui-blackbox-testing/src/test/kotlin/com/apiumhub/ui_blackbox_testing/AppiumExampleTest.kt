@@ -3,6 +3,7 @@ package com.apiumhub.ui_blackbox_testing
 import io.appium.java_client.android.AndroidDriver
 import io.appium.java_client.android.AndroidElement
 import io.appium.java_client.remote.MobileCapabilityType
+import junit.framework.TestCase.*
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -22,7 +23,7 @@ class AppiumExampleTest {
         capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "android-emulator")
         capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, "9")
         capabilities.setCapability("appPackage", "com.apiumhub.ui_testing")
-        capabilities.setCapability("appActivity", ".MainActivity")
+        capabilities.setCapability("appActivity", ".lesson_6.MainActivity")
         capabilities.setCapability("automationName", "UiAutomator2")
 
         try {
@@ -49,6 +50,33 @@ class AppiumExampleTest {
         val textView = driver.findElementById("text_dashboard")
         Assert.assertEquals("This is dashboard Fragment", textView.text)
     }
+
+    @Test
+    fun `submit button is disabled when email is invalid`() {
+        navigateToLogin()
+        val emailInput = driver.findElementById("login_username_et")
+        emailInput.replaceValue("invalidemail")
+        val submitBtn = driver.findElementById("login_submit_btn")
+        assertFalse(submitBtn.isEnabled)
+    }
+
+    @Test
+    fun `submit button is enabled when email and password are both valid`() {
+        navigateToLogin()
+        val emailInput = driver.findElementById("login_username_et")
+        emailInput.replaceValue("email@domain.com")
+        val passwordInput = driver.findElementById("login_password_et")
+        passwordInput.replaceValue("123456")
+        val submitBtn = driver.findElementById("login_submit_btn")
+        assertTrue(submitBtn.isEnabled)
+
+        submitBtn.click()
+
+        val loggedInTv = driver.findElementById("logged_in_tv")
+        assertTrue(loggedInTv.text.contains("email@domain.com"))
+    }
+
+
 
     //region solutions
     @Test
@@ -92,12 +120,12 @@ class AppiumExampleTest {
         Assert.assertFalse(submitButton.isEnabled)
     }
 
+    //endregion
+
     private fun navigateToLogin() {
         val loginIcon = driver.findElementById("navigation_login")
         loginIcon.click()
     }
-
-    //endregion
 
     @After
     fun tearDown() {
