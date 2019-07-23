@@ -15,13 +15,6 @@ class MyFirstComponent @JvmOverloads constructor(context: Context, attrs: Attrib
         val resources = context.obtainStyledAttributes(attrs, R.styleable.MyFirstComponent, defStyleAttr, 0)
 //        val attribute = resources.getString(R.styleable.MyFirstComponent_my_flag_attr) ?: "default value"
         resources.recycle()
-        firstComponentBtn.setOnClickListener {
-            if (firstComponentBtn.text == "Follow") {
-                firstComponentBtn.text = "Following"
-            } else {
-                firstComponentBtn.text = "Follow"
-            }
-        }
     }
 
 
