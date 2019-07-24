@@ -1,5 +1,6 @@
 package com.apiumhub.androidarch.lesson_5.mvvm
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import arrow.core.Try
 import com.apiumhub.androidarch.lesson_4.domain.GetUsers
 import com.apiumhub.androidarch.lesson_4.domain.exception.NoInternetConnectionException
@@ -8,6 +9,7 @@ import io.mockk.mockk
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.Dispatchers
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import java.util.concurrent.CountDownLatch
 
@@ -16,6 +18,9 @@ class ViewModelTest {
     private val getUsers = mockk<GetUsers>()
 
     private lateinit var viewModel: ViewModel
+
+    @get:Rule
+    val instantExecutor = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {

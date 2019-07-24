@@ -9,6 +9,7 @@ import com.apiumhub.androidarch.lesson_4.data.db.UsersRoomRepository
 import com.apiumhub.androidarch.lesson_4.data.network.UsersApi
 import com.apiumhub.androidarch.lesson_4.data.network.UsersRetrofitRepository
 import com.apiumhub.androidarch.lesson_4.domain.GetUsers
+import com.apiumhub.androidarch.lesson_4.domain.exception.NoInternetConnectionException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +35,7 @@ class ViewModel(
     }
 
     private fun getData() {
-        //TODO
+        usersMutable.postValue(ViewModelEvent.Error)
     }
 
     fun retry() {
