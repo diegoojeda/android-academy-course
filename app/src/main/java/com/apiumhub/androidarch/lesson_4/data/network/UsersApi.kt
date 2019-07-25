@@ -1,7 +1,6 @@
 package com.apiumhub.androidarch.lesson_4.data.network
 
 import com.apiumhub.androidarch.lesson_4.data.network.dto.UserNetworkDto
-import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
