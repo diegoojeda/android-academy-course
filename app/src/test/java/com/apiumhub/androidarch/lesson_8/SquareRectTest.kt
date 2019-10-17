@@ -10,8 +10,8 @@ class SquareRectTest {
         val forma: Rectangle = Rectangle(2, 3)
         assertEquals(6, forma.getArea())
 
-        val forma2: Rectangle = Square(2, 3)
-        assertEquals(6, forma2.getArea())
+        val forma2: Rectangle = Square(2)
+        assertEquals(4, forma2.getArea())
     }
 }
 
@@ -19,6 +19,4 @@ open class Rectangle(open val height: Int, open val width: Int) {
     open fun getArea() = height * width
 }
 
-class Square(override val width: Int, override val height: Int): Rectangle(width, height){
-    override fun getArea(): Int = width * width
-}
+class Square(side: Int): Rectangle(side, side)
