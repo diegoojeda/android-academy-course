@@ -47,17 +47,10 @@ class `6-TODOWhyCoroutines` {
 
     @Test
     fun readFileSizeWithCoroutines() = runBlocking {
-        val fis = FileInputStream(FILE_NAME)
-        val size = readFileCoroutines(fis)
-        println("Read $size bytes")
-        fis.close()
+        Unit
     }
 
 
-    private suspend fun readFileCoroutines(fis: FileInputStream): Int {
-        delay(1)
-        return fis.read()
-    }
 
     //region solution
     /*

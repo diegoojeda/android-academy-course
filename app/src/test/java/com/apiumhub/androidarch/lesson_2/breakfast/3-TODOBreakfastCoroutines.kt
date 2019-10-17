@@ -12,75 +12,17 @@ class `3-TODOBreakfastCoroutines` {
 
     @Test
     fun `breakfast coroutines sequentially`() = runBlocking {
-        pourCoffee()
-        println("Coffee is ready")
-        fryEggs(2)
-        println("Eggs are ready")
-//        fryBacon(2)
-//        println("Bacon is ready")
-//        val toast = toastBread(2)
-//        val toastWithButter = applyButter(toast)
-//        applyJam(toastWithButter)
-//        println("Toasts are ready")
-//        pourOrangeJuice()
-//        println("OJ is ready")
         Unit
     }
 
     @Test
     fun `breakfast sequentially asynchronous`() = runBlocking {
-        val coffeeJob = launch {
-            println("Starting coffee")
-            pourCoffee()
-            println("Coffee is ready")
-        }
-        val eggsJob = launch {
-            println("Starting eggs")
-            fryEggs(2)
-            println("Eggs are ready")
-        }
-        val toastsJob = launch {
-            val bread = toastBread(2)
-        }
-        //.....
-        coffeeJob.join()
-        eggsJob.join()
-        toastsJob.join()
+        Unit
     }
 
     @Test
     fun `breakfast async awaiting`() = runBlocking {
-        val coffeeAsync = launch {
-            println("Started coffee")
-            pourCoffee()
-            println("Finished coffee")
-        }
-        val eggsAsync = launch {
-            println("Started eggs")
-            fryEggs(2)
-            println("Finished eggs")
-        }
-        val toastAsync = async {
-            println("Started toasts")
-            val toast = toastBread(2)
-            println("Finished toasts")
-            return@async toast
-        }
-
-        val toast = toastAsync.await()
-        val toastWithButterAsync = async { applyButter(toast) }
-        val toastWithButter = toastWithButterAsync.await()
-        val toastWithJamAndButterAsync = launch { applyJam(toastWithButter) }
-
-
-
-        coffeeAsync.join()
-        println("Coffee ready")
-        eggsAsync.join()
-        println("Eggs ready")
-        toastWithJamAndButterAsync.join()
-        println("Toasts are ready")
-
+        Unit
     }
 
     //region common
