@@ -10,6 +10,10 @@ and returns a new linked list (head) which only contains the elements which appl
 For example: Given the list: 1 -> 2 -> 3, and the predicate x => x >= 2, filter should return 2 -> 3, since x >= 2 applies to both 2 and 3.
  */
 
+fun <INPUT> filter(list: List<INPUT>, predicate: (INPUT) -> Boolean): List<INPUT> = TODO()
+
+//region solutions
+
 fun <INPUT> filterRecursive(list: List<INPUT>, predicate: (INPUT) -> Boolean): List<INPUT> {
     if (list.size == 1) {
         return if (predicate(list.first())) listOf(list.first()) else emptyList()
@@ -31,6 +35,8 @@ fun <INPUT> filterIterative(list: List<INPUT>, predicate: (INPUT) -> Boolean): L
     return out
 }
 
+//endregion
+
 class FilterTest {
     @Test
     fun testFilterRecursive() {
@@ -47,6 +53,15 @@ class FilterTest {
         val expected = listOf(2, 4)
         val isEven = { p1: Int -> p1 % 2 == 0 }
         val actual = filterIterative(list, isEven)
+        Assert.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun testFilter() {
+        val list = listOf(1, 2, 3, 4)
+        val expected = listOf(2, 4)
+        val isEven = { p1: Int -> p1 % 2 == 0 }
+        val actual = filter(list, isEven)
         Assert.assertEquals(expected, actual)
     }
 }

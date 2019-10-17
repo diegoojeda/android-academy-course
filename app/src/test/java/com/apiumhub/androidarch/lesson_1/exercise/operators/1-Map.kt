@@ -11,6 +11,10 @@ and returns a new list where every element is the result of applying the
 For example: Given the list: 1 -> 2 -> 3, and the mapping function x => x * 2, map should return 2 -> 4 -> 6
  */
 
+fun <INPUT, OUTPUT> map(list: List<INPUT>, transform: (INPUT) -> OUTPUT): List<OUTPUT> = TODO()
+
+//region solutions
+
 fun <INPUT, OUTPUT> mapRecursive(list: List<INPUT>, transform: (INPUT) -> OUTPUT): List<OUTPUT> {
     if (list.size == 1) {
         return listOf(transform(list.first()))
@@ -25,6 +29,8 @@ fun <INPUT, OUTPUT> mapIterative(list: List<INPUT>, transform: (INPUT) -> OUTPUT
     }
     return out
 }
+
+//endregion
 
 class MapTest {
 
@@ -41,6 +47,14 @@ class MapTest {
         val list = listOf(1, 2, 3, 4, 5)
         val expected = listOf(2, 4, 6, 8, 10)
         val actual = mapIterative(list) { it * 2 }
+        Assert.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun testMap() {
+        val list = listOf(1, 2, 3, 4, 5)
+        val expected = listOf(2, 4, 6, 8, 10)
+        val actual = map(list) { it * 2 }
         Assert.assertEquals(expected, actual)
     }
 }

@@ -27,37 +27,13 @@ Make the following tests green!
  */
 
 object Implementation {
-    fun getAverageGradeForEachDepartment(students: List<Student>): Map<Student.Department, Double> =
-        students
-            .groupBy { it.department }
-            .mapValues {
-                it.value
-                    .map { it.grade }
-                    .average()
-            }
+    fun getAverageGradeForEachDepartment(students: List<Student>): Map<Student.Department, Double> = TODO()
 
-    fun getNumberOfStudentsByDepartment(students: List<Student>): Map<Student.Department, Int> =
-        students
-            .groupBy { it.department }
-            .mapValues { it.value.count() }
+    fun getNumberOfStudentsByDepartment(students: List<Student>): Map<Student.Department, Int> = TODO()
 
-    fun getNameOfStudentsByDepartment(students: List<Student>): Map<Student.Department, List<String>> =
-        students
-            .groupBy { it.department }
-            .mapValues { it.value.map { it.name } }
+    fun getNameOfStudentsByDepartment(students: List<Student>): Map<Student.Department, List<String>> = TODO()
 
-    fun getNumberOfStudentsByGenderForEachDepartment(students: List<Student>): Map<Student.Department, Map<Student.Gender, Int>> =
-        students
-            .groupBy { it.department }
-            .mapValues {
-                it.value
-                    .groupBy {
-                        it.gender
-                    }
-                    .mapValues {
-                        it.value.count()
-                    }
-            }
+    fun getNumberOfStudentsByGenderForEachDepartment(students: List<Student>): Map<Student.Department, Map<Student.Gender, Int>> = TODO()
 }
 
 class Tests {
@@ -127,13 +103,16 @@ class Tests {
 //region solutions
 object Solutions {
     fun getAverageGradeForEveryDepartment(students: List<Student>): Map<Student.Department, Double> =
-        students.groupBy { it.department }.mapValues { it.value.map { it.grade }.average() }
+        students.groupBy { it.department }.mapValues { it.value.map { student -> student.grade }.average() }
 
     fun getNumberOfStudentsByDepartment(students: List<Student>): Map<Student.Department, Int> =
         students.groupBy { it.department }.mapValues { it.value.count() }
 
     fun getNameOfStudentsByDepartment(students: List<Student>): Map<Student.Department, List<String>> =
-        students.groupBy { it.department }.mapValues { it.value.map { it.name } }
+        students.groupBy { it.department }.mapValues { it.value.map { student -> student.name } }
+
+    fun getNumberOfStudentsByGenderForEachDepartment(students: List<Student>): Map<Student.Department, Map<Student.Gender, Int>> =
+        students.groupBy { it.department }.mapValues { it.value.groupBy { student -> student.gender }.mapValues { it.value.count() } }
 }
 
 //endregion

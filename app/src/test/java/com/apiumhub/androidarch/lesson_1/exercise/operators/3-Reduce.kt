@@ -23,6 +23,13 @@ Another example:
 Given the list: 1 -> 2 -> 3 -> 4, the function (acc, curr) => acc * curr and an initial value of 1, reduce should return 24
  */
 
+fun <INPUT, OUTPUT> reduce(
+    list: List<INPUT>,
+    initialValue: OUTPUT,
+    operation: (acc: OUTPUT, INPUT) -> OUTPUT
+): OUTPUT = TODO()
+
+//region solutions
 fun <INPUT, OUTPUT> reduceRecursive(
         list: List<INPUT>,
         initialValue: OUTPUT,
@@ -46,6 +53,8 @@ fun <INPUT, OUTPUT> reduceIterative(
     return value
 }
 
+//endregion
+
 class ReduceTest {
     @Test
     fun testReduceRecursive() {
@@ -62,6 +71,15 @@ class ReduceTest {
         val operation = { acc: Int, next: Int -> acc + next }
         val expected = 6
         val actual = reduceIterative(list, 0, operation)
+        Assert.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun testReduce() {
+        val list = listOf(1, 2, 3)
+        val operation = { acc: Int, next: Int -> acc + next }
+        val expected = 6
+        val actual = reduce(list, 0, operation)
         Assert.assertEquals(expected, actual)
     }
 }
