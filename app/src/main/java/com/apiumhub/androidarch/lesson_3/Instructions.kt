@@ -18,11 +18,9 @@ class RotateRight : Instruction {
 
 class MoveForward : Instruction {
 
-    private val moves = HashMap<Orientation, (Position) -> Position>()
-
-    init {
-        TODO("Fill moves map with position changing when moving on any orientation")
-    }
+    private val moves = mapOf<Orientation, (Position) -> Position>(
+        //TODO Fill moves map with position changing when moving on any orientation
+    )
 
     override fun apply(position: Position): Position {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
