@@ -11,12 +11,5 @@ class GetUsers(
     private val databaseRepository: UsersRoomRepository
 ) {
     suspend fun execute(): Try<List<User>> =
-        networkRepository
-            .getAll()
-            .fold({
-                databaseRepository.getAll()
-            },{
-                databaseRepository.saveAll(it)
-                Try.just(it)
-            })
+        TODO()
 }
