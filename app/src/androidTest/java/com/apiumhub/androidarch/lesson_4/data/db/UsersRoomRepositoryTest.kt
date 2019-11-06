@@ -40,7 +40,15 @@ class UsersRoomRepositoryTest {
 
     @Test
     fun shouldInsertInDbAndReadAfter() = runBlocking {
+        val expected = listOf(dummyUser)
+        userRoomRepository.saveAll(expected)
+        val actual = userRoomRepository.getAll()
 
+        actual.fold({
+            fail()
+        },{
+            assert(it == expected)
+        })
     }
 
     companion object {

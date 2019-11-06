@@ -9,9 +9,9 @@ class UsersRoomRepository(
     private val userDao: UserDao
 ) : ReadRepository<User>, WriteRepository<User> {
 
-    override suspend fun getAll(): Try<List<User>> = TODO()
+    override suspend fun getAll(): Try<List<User>> = Try.just(userDao.getAll().map(UserDbEntity::toDomain))
 
     override suspend fun saveAll(items: List<User>) {
-        TODO()
+        userDao.insertAll(items.map(UserDbEntity.Companion::fromDomain))
     }
 }

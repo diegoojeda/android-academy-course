@@ -11,6 +11,7 @@ import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import java.util.*
 
@@ -29,6 +30,9 @@ class GetUsersTest {
 
     @Test
     fun `should load users from network`() = runBlocking {
+        coEvery {
+            dbRepository.getAll()
+        } returns Try.raiseError(Error())
         mockNetworkSuccess()
 
         val actual = getUsers.execute()
@@ -57,6 +61,9 @@ class GetUsersTest {
     @Test
     fun `should save in database when read from network`() = runBlocking {
         mockNetworkSuccess()
+        coEvery {
+            dbRepository.getAll()
+        } returns Try.raiseError(Error())
 
         getUsers.execute()
 

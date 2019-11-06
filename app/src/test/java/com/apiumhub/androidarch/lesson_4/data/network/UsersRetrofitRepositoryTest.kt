@@ -1,6 +1,5 @@
 package com.apiumhub.androidarch.lesson_4.data.network
 
-import junit.framework.TestCase.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -26,9 +25,7 @@ class UsersRetrofitRepositoryTest {
     @Test
     fun shouldReadUsersFromNetwork() = runBlocking {
         val actual = sut.getAll()
-
-        assertTrue(actual.isSuccess())
-
+        assert(actual.isSuccess())
         Unit
     }
 }
