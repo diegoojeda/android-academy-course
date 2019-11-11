@@ -9,7 +9,7 @@ import com.apiumhub.androidarch.lesson_4.data.db.UsersRoomRepository
 import com.apiumhub.androidarch.lesson_4.data.network.UsersApi
 import com.apiumhub.androidarch.lesson_4.data.network.UsersRetrofitRepository
 import com.apiumhub.androidarch.lesson_4.domain.GetUsers
-import com.apiumhub.androidarch.lesson_4.domain.exception.NoInternetConnectionException
+import com.apiumhub.androidarch.lesson_4.domain.entity.User
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,28 +20,31 @@ class ViewModel(
             UsersRetrofitRepository(UsersApi.create()),
             UsersRoomRepository(AppDb.getDb().userDao())
         ),
-    private val dispatcher: CoroutineDispatcher = Dispatchers.Main
+    dispatcher: CoroutineDispatcher = Dispatchers.Main
 
 ) : ViewModel() {
 
-    private val usersMutable = MutableLiveData<ViewModelEvent>()
-
-    val users: LiveData<ViewModelEvent> = usersMutable
+    private val usersInternal = MutableLiveData<ViewModelState>()
+    val users: LiveData<ViewModelState> = usersInternal
 
     init {
         viewModelScope.launch(dispatcher) {
-            getData()
+            usersInternal.postValue(ViewModelState.Loading)
+            getUsers.execute().fold({
+                usersInternal.postValue(ViewModelState.Error(it))
+            },{
+                usersInternal.postValue(ViewModelState.Success(it))
+            })
         }
     }
 
-    private fun getData() {
-        usersMutable.postValue(ViewModelEvent.Error)
-    }
+    fun reload() {
 
-    fun retry() {
-        viewModelScope.launch {
-            getData()
-        }
     }
+}
 
+sealed class ViewModelState {
+    object Loading: ViewModelState()
+    data class Error(val error: Throwable): ViewModelState()
+    data class Success(val users: List<User>): ViewModelState()
 }

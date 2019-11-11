@@ -18,17 +18,7 @@ class Presenter(
     }
 
     suspend fun start() {
-        ui?.showLoading()
-        getUsers.execute().fold({
-            when (it) {
-            is NoInternetConnectionException -> ui?.showNoConnectionError()
-            else -> ui?.showGenericError()
-        }
-        }, {
-            ui?.onDataLoaded(it)
-            ui?.hideError()
-        })
-        ui?.hideLoading()
+
     }
 
     fun stop() {

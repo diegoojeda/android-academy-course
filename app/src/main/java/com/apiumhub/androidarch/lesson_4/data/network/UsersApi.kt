@@ -12,7 +12,7 @@ interface UsersApi {
     companion object {
         fun create(): UsersApi = Retrofit
             .Builder()
-            .baseUrl("https://apiumacademy.serveo.net")
+            .baseUrl("https://10.0.2.2:8080")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(UsersApi::class.java)
