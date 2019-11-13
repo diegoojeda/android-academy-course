@@ -16,32 +16,28 @@ class KakaoTests {
 
     @get:Rule
     var activityRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    private val homeScreen = HomeScreen()
+    private val loggedInScreen = LoggedInScreen()
 
     @Test
     fun shouldClickHomeNavButtonAndAssertText() {
-        onScreen<HomeScreen> {
-            navigateToHome {
-                assertHomeText("This is home Fragment")
-            }
+        homeScreen.navigateToHome {
+            it.assertHomeText("This is home Fragment")
         }
     }
 
     @Test
     fun shouldClickDashboardNavButtonAndAssertText() {
-        onScreen<HomeScreen> {
-            navigateToDashboard {
-                assertDashboardText("This is dashboard Fragment")
-            }
+        homeScreen.navigateToDashboard {
+            it.assertDashboardText("This is dashboard Fragment")
         }
     }
 
     @Test
     fun submit_button_should_be_disabled_when_email_is_invalid() {
-        onScreen<HomeScreen> {
-            navigateToLogin {
-                typeEmail("invalidEmail")
-                checkSubmitButtonDisabled()
-            }
+        homeScreen.navigateToLogin {
+            it.typeEmail("someInvalidEmail")
+            it.checkSubmitButtonDisabled()
         }
     }
 
@@ -49,15 +45,14 @@ class KakaoTests {
     fun should_navigate_when_email_and_password_are_valid_and_submit_is_clicked() {
         onScreen<HomeScreen> {
             navigateToLogin {
-                typeEmail("email@domain.com")
-                typePassword("123456")
+                typeEmail("someValidEmail@domain.com")
+                typePassword("123456789")
                 clickSubmit()
             }
         }
         waitUntilActivityVisible<LoggedInActivity>()
-
         onScreen<LoggedInScreen> {
-            checkTvContains("email@domain.com")
+            checkTvContains("User someValidEmail@domain.com is logged in")
         }
     }
 
@@ -159,7 +154,7 @@ class HomeScreen : Screen<HomeScreen>() {
     }
 }
 
-class LoggedInScreen: Screen<LoggedInScreen>() {
+class LoggedInScreen : Screen<LoggedInScreen>() {
     val userTextView = KTextView { withId(R.id.logged_in_tv) }
 
     fun checkTvContains(text: String) {

@@ -4,16 +4,15 @@ import io.appium.java_client.android.AndroidDriver
 import io.appium.java_client.android.AndroidElement
 import io.appium.java_client.remote.MobileCapabilityType
 import junit.framework.TestCase.*
-import org.junit.After
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Test
+import org.junit.*
+import org.openqa.selenium.By
 import org.openqa.selenium.remote.DesiredCapabilities
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.concurrent.TimeUnit
 
 class AppiumExampleTest {
+
     private lateinit var driver: AndroidDriver<AndroidElement>
 
     @Before
@@ -37,49 +36,39 @@ class AppiumExampleTest {
 
     @Test
     fun `Navigate to home and assert text is displayed in home fragment`() {
-        val homeIcon = driver.findElementById("navigation_home")
-        homeIcon.click()
-        val textView = driver.findElementById("text_home")
-        Assert.assertEquals("This is home Fragment", textView.text)
+        driver.findElement(By.id("navigation_home")).click()
+        assertEquals("This is home Fragment", driver.findElement(By.id("text_home")).text)
     }
 
     @Test
     fun `Navigate to dashboard and assert text is displayed`() {
-        val dashboardIcon = driver.findElementById("navigation_dashboard")
-        dashboardIcon.click()
-        val textView = driver.findElementById("text_dashboard")
-        Assert.assertEquals("This is dashboard Fragment", textView.text)
+        driver.findElement(By.id("navigation_dashboard")).click()
+        assertEquals("This is dashboard Fragment", driver.findElement(By.id("text_dashboard")).text)
     }
 
     @Test
     fun `submit button is disabled when email is invalid`() {
-        navigateToLogin()
-        val emailInput = driver.findElementById("login_username_et")
-        emailInput.replaceValue("invalidemail")
-        val submitBtn = driver.findElementById("login_submit_btn")
-        assertFalse(submitBtn.isEnabled)
+        driver.findElement(By.id("navigation_login")).click()
+        driver.findElementById("login_username_et").replaceValue("someInvalidEmail")
+        assert(!driver.findElementById("login_submit_btn").isEnabled)
     }
 
     @Test
     fun `submit button is enabled when email and password are both valid`() {
-        navigateToLogin()
-        val emailInput = driver.findElementById("login_username_et")
-        emailInput.replaceValue("email@domain.com")
-        val passwordInput = driver.findElementById("login_password_et")
-        passwordInput.replaceValue("123456")
+        driver.findElement(By.id("navigation_login")).click()
+        driver.findElementById("login_username_et").replaceValue("someValidEmail@domain.com")
+        driver.findElementById("login_password_et").replaceValue("123456789")
         val submitBtn = driver.findElementById("login_submit_btn")
-        assertTrue(submitBtn.isEnabled)
+        assert(submitBtn.isEnabled)
 
         submitBtn.click()
 
-        val loggedInTv = driver.findElementById("logged_in_tv")
-        assertTrue(loggedInTv.text.contains("email@domain.com"))
+        assertEquals("User someValidEmail@domain.com is logged in", driver.findElementById("logged_in_tv").text)
     }
-
-
 
     //region solutions
     @Test
+    @Ignore
     fun `Navigate to login and check button is disabled`() {
         navigateToLogin()
         typeEmail("invalid email")
@@ -87,6 +76,7 @@ class AppiumExampleTest {
     }
 
     @Test
+    @Ignore
     fun `Navigate to login, type an invalid password and check button is disabled`() {
         navigateToLogin()
         typePassword("1234")
@@ -94,6 +84,7 @@ class AppiumExampleTest {
     }
 
     @Test
+    @Ignore
     fun `Navigate to login, type valid username and password, and navigate to next screen`() {
         navigateToLogin()
         typeEmail("someEmail@someDomain.com")
