@@ -17,23 +17,24 @@ class MyFirstComponentTest {
 
     @Test
     fun shouldChangeButtonTextWhenClicked() {
-        val follow = activityRule.activity.getString(R.string.follow)
-        val following = activityRule.activity.getString(R.string.following)
-        val button = onView(withId(R.id.firstComponentBtn))
-        button.check(matches(withText(follow)))
-        button.perform(click())
-        button.check(matches(withText(following)))
+        val followButton = onView(withId(R.id.firstComponentBtn))
+        followButton.perform(click())
+        followButton.check(matches(withText("Unfollow")))
+        followButton.perform(click())
+        followButton.check(matches(withText("Follow")))
     }
 
     @Test
     fun shouldChangeDescriptionTextWhenUsernameIsUpdated() {
-        val username = "other username"
-        val expectedDescription = String.format(activityRule.activity.getString(R.string.description), username)
-        val component = activityRule.activity.findViewById<MyFirstComponent>(R.id.firstComponentInActivity)
-        component.updateUsername(username)
+        val userNameTv = onView(withId(R.id.firstComponentUsername))
+        val descriptionTv = onView(withId(R.id.firstComponentDescription))
 
-        onView(withId(R.id.firstComponentUsername)).check(matches(withText(username)))
-        onView(withId(R.id.firstComponentDescription)).check(matches(withText(expectedDescription)))
+        val component = activityRule.activity.findViewById<MyFirstComponent>(R.id.firstComponentInActivity)
+
+        component.username = "Other"
+
+        userNameTv.check(matches(withText("Other")))
+        descriptionTv.check(matches(withText("Description for Other")))
 
     }
 }
